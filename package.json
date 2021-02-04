@@ -1,0 +1,11 @@
+{
+  "name": "elearningdatadapp",
+  "version": "1.0.0",
+  "description": "Final Project of my university studies \"Grado en Ingeniería Informática\". This is a decentralized application to sell elearning data from a LRS (Learning Record Store)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
