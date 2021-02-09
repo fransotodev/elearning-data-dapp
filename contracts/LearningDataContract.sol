@@ -32,6 +32,7 @@ contract LearningDataContract {
     struct Offer {
         string endpointAPI;
         string endpointDashboard;
+        string authorizationHeader;
         string description;
         uint256 price;
         address payable[] accountsToPay;
@@ -66,21 +67,22 @@ contract LearningDataContract {
     );
 
 
-    function getOffer(uint256 offerIndex) public view returns ( string memory, string memory, string memory, uint256 )
+    function getOffer(uint256 offerIndex) public view returns ( string memory, string memory, string memory, string memory, uint256 )
     {
         Offer memory offer = IndexToOffer[offerIndex];
         if (offer.buyer == msg.sender) {
-            return ( IndexToOffer[offerIndex].endpointAPI, IndexToOffer[offerIndex].endpointDashboard, IndexToOffer[offerIndex].description, IndexToOffer[offerIndex].price );
+            return ( offer.endpointAPI, offer.endpointDashboard, offer.authorizationHeader, offer.description, offer.price );
         } else {
-            return ( "","", IndexToOffer[offerIndex].description, IndexToOffer[offerIndex].price );
+            return ( "", "", "", offer.description, offer.price );
         }
     }
 
-    function registerOffer( string memory endpointAPI, string memory endpointDashboard, string memory description, uint256 price, address payable[] memory accounts ) public 
+    function registerOffer( string memory endpointAPI, string memory endpointDashboard, string memory authorizationHeader, string memory description, uint256 price, address payable[] memory accounts ) public 
     returns (uint256){
         
         require(bytes(endpointAPI).length != 0);
         require(bytes(endpointDashboard).length != 0);
+        require(bytes(authorizationHeader).length != 0);
         require(bytes(description).length != 0);
         require(price > 0);
         require(accounts.length != 0);
@@ -90,6 +92,7 @@ contract LearningDataContract {
         IndexToOffer[index] = Offer(
             endpointAPI,
             endpointDashboard,
+            authorizationHeader,
             description,
             price,
             accounts,
@@ -103,7 +106,7 @@ contract LearningDataContract {
         return index;
     }
 
-    function purchaseOffer(uint256 index) public payable returns (string memory, string memory)
+    function purchaseOffer(uint256 index) public payable returns (string memory, string memory, string memory)
     {
         //Verify offer exists and status available
         require( IndexToOffer[index].status == STATUS_AVAILABLE, "This offer is not available");
@@ -124,7 +127,7 @@ contract LearningDataContract {
         //Reference to call()/send()/transfer methods: https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/
 
         emit OfferPurchased(index, IndexToOffer[index].description, IndexToOffer[index].price, IndexToOffer[index].accountsToPay, IndexToOffer[index].buyer, IndexToOffer[index].status);
+        return (IndexToOffer[index].endpointAPI, IndexToOffer[index].endpointDashboard, IndexToOffer[index].authorizationHeader);
         
-        return (IndexToOffer[index].endpointAPI, IndexToOffer[index].endpointDashboard);
     }
 }
