@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "Final Project of my university studies \"Grado en Ingeniería Informática\". This is a decentralized application to sell elearning data from a LRS (Learning Record Store)",
   "main": "",
-  "scripts": {
-    
-  },
+  "scripts": {},
   "author": "Francisco Manuel Soto Ramírez",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "bignumber": "^1.1.0",
     "chai": "^4.3.0",
     "chai-arrays": "^2.2.0",
