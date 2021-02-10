@@ -1,17 +1,9 @@
-const GeneralTests = require("./Unit/General.test");
-const RegisterOfferTests = require("./Unit/RegisterOffer.test");
-const PurchaseOfferTests = require("./Unit/PurchaseOffer.test");
-const GetOfferTests = require("./Unit/GetOffer.test");
+const GeneralTests = require("./unit/General.test");
+const RegisterOfferTests = require("./unit/RegisterOffer.test");
+const PurchaseOfferTests = require("./unit/PurchaseOffer.test");
+const GetOfferTests = require("./unit/GetOffer.test");
 
 const { Config } = require("../config/testConfig");
-
-/*
-    describe('text', () => {
-        it('text', async () => {
-
-        });
-    });
-*/
 
 contract("Smart Contract tests", async (accounts) => {
   this.config;

@@ -5,18 +5,9 @@ const data = require("./data");
 function getWeb3() {
   if (typeof web3 !== "undefined") {
     let web3 = new Web3(web3.currentProvider);
-    console.log("Detected");
     return web3;
   } else {
-    let web3 = new Web3(
-      new Web3.providers.WebsocketProvider("ws://localhost:8545", {
-        clientOptions: {
-          maxReceivedFrameSize: 100000000,
-          maxReceivedMessageSize: 100000000,
-        },
-      })
-    );
-    console.log("8545");
+    let web3 = new Web3("ws://localhost:8545");
     return web3;
   }
 }
@@ -29,14 +20,10 @@ function fetchContract(web3) {
   return new Promise(async (resolve, reject) => {
     var netId = await web3.eth.net.getId();
     var netData = ContractABI.networks[netId];
-    //console.log(netId);
-
     if (netData) {
-      //console.log(netData.address);
       var DataMarket = new web3.eth.Contract(ContractABI.abi, netData.address);
       resolve(DataMarket);
     } else {
-      //console.log("Contract has not been deployed to detected network");
       reject("Contract has not been deployed to detected network");
     }
   });
@@ -76,7 +63,7 @@ async function main() {
 
   populate.bind(this)(async () => {
     const numOffers = await LearningDataContract.methods.numOffers().call();
-    console.log(numOffers, "Offers:");
+    console.log(numOffers, "offers:");
 
     for (let i = 0; i < numOffers; i++) {
       console.log(await LearningDataContract.methods.getOffer(i).call());
