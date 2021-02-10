@@ -2,9 +2,9 @@
   "name": "elearningdatadapp",
   "version": "1.0.0",
   "description": "Final Project of my university studies \"Grado en Ingeniería Informática\". This is a decentralized application to sell elearning data from a LRS (Learning Record Store)",
-  "main": "index.js",
+  "main": "",
   "scripts": {
-    "test": "mocha \"test/server.test.js\""
+    
   },
   "author": "Francisco Manuel Soto Ramírez",
   "license": "ISC",
