@@ -9,24 +9,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import NavItem from "./NavItem";
 
-/*
-import logo from "../market_stand.png";
-<img
-  src={logo}
-  style={{
-    width: "46px",
-    height: "46px",
-    borderRadius: "50%",
-    overflow: "hidden",
-    marginTop: "-6px",
-    backgroundColor: "transparent",
-  }}
-  alt="Home icon"
-></img>
-
-Possible background color: 78f096
-*/
-
 function Navbar(props) {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);

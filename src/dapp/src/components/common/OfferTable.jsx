@@ -21,9 +21,9 @@ class OfferTable extends Component {
             </thead>
             <tbody>
               {data.map((item) => (
-                <tr key={item.description}>
+                <tr key={item.index}>
                   {columns.map((column) => (
-                    <td key={item.description + column.name}>
+                    <td key={item.index + column.name}>
                       {this.renderCell(item, column)}
                     </td>
                   ))}
