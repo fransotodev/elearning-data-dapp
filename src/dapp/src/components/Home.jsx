@@ -1,7 +1,7 @@
 import React from "react";
 
 function Home(props) {
-  return <div>Home</div>;
+  return <h1 style={{ paddingLeft: "500px" }}>Home</h1>;
 }
 
 export default Home;

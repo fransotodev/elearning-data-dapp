@@ -67,13 +67,13 @@ contract LearningDataContract {
     );
 
 
-    function getOffer(uint256 offerIndex) public view returns ( string memory, string memory, string memory, string memory, uint256 )
+    function getOffer(uint256 offerIndex) public view returns ( string memory, string memory, string memory, string memory, uint256, uint8 )
     {
         Offer memory offer = IndexToOffer[offerIndex];
         if (offer.buyer == msg.sender) {
-            return ( offer.endpointAPI, offer.endpointDashboard, offer.authorizationHeader, offer.description, offer.price );
+            return ( offer.endpointAPI, offer.endpointDashboard, offer.authorizationHeader, offer.description, offer.price, offer.status );
         } else {
-            return ( "", "", "", offer.description, offer.price );
+            return ( "", "", "", offer.description, offer.price, offer.status );
         }
     }
 

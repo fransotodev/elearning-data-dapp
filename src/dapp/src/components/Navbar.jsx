@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faWallet,
   faMoneyBill,
+  faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import NavItem from "./NavItem";
 
 /*
 import logo from "../market_stand.png";
@@ -32,46 +34,53 @@ function Navbar(props) {
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light "
-      style={{ backgroundColor: "#78f096" }}
+      style={{ backgroundColor: "#78f096", height: "55px" }}
     >
       <div className="container-fluid">
-        <NavLink className="navbar-brand" to="/">
+        <Link className="navbar-brand" style={{ paddingRight: "30px" }} to="/">
           <FontAwesomeIcon icon={faHome} size="2x" />
-        </NavLink>
+        </Link>
 
         <button
           className="navbar-toggler"
           type="button"
-          dataToggle="collapse"
-          dataTarget="#navbarSupportedContent"
-          ariaControls="navbarSupportedContent"
-          ariaExpanded={!isNavCollapsed ? true : false}
-          ariaLabel="Toggle navigation"
+          datatoggle="collapse"
+          datatarget="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded={!isNavCollapsed ? true : false}
+          aria-label="Toggle navigation"
           onClick={handleNavCollapse}
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
 
         <div
           className={`${isNavCollapsed ? "collapse" : ""} navbar-collapse`}
           id="navbarSupportedContent"
         >
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/market">
-                <FontAwesomeIcon icon={faMoneyBill} size="lg" />
-                <span> </span>
-                MarketPlace
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/purchased">
-                <FontAwesomeIcon icon={faWallet} size="lg" />
-                <span> </span>
-                Bought Offers
-              </NavLink>
-            </li>
-          </ul>
+          <div className="navbar-nav me-auto mb-2 mb-lg-0">
+            <NavItem
+              path={"/market"}
+              style={{ paddingRight: "15px" }}
+              icon={faMoneyBill}
+              text={"Marketplace"}
+              iconPosition={"Left"}
+            />
+            <NavItem
+              path={"/purchased"}
+              style={{ paddingRight: "15px" }}
+              icon={faWallet}
+              text={"Purchased"}
+              iconPosition={"Left"}
+            />
+            <NavItem
+              path={"/profile"}
+              style={{ position: "absolute", right: 5 }}
+              icon={faUserCircle}
+              text={"Profile"}
+              iconPosition={"Right"}
+            />
+          </div>
         </div>
       </div>
     </nav>

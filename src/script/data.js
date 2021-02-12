@@ -3,6 +3,7 @@ module.exports = {
 
   Store1: {
     numberStatements: 261,
+    date: "March-May 2020",
     description:
       "261 Statements | March-May 2020 | Nationwide Mutual Insurance Company, Advanced Micro Devices, Deree, UGI Corporation, eBay, Whole Foods Market, Susser Holdings Corporation, EOG Resources, Advance Auto Parts, Applied Materials",
     authorizationHeader:
@@ -12,6 +13,7 @@ module.exports = {
   },
   Store2: {
     numberStatements: 276,
+    date: "March-April 2020",
     description:
       "276 Statements | March-April 2020 | UGI Corporation, Ross Stores, Applied Materials, Murphy Oil, Nationwide Mutual Insurance Company, eBay, Expeditors International, Whole Foods Market, Advanced Micro Devices, Susser Holdings Corporation",
     authorizationHeader:
@@ -21,6 +23,7 @@ module.exports = {
   },
   Store3: {
     numberStatements: 265,
+    date: "April-April 2020",
     description:
       "265 Statements | April-April 2020 | Deree, C. H. Robinson Worldwide, ConocoPhillips, Anixter, Advanced Micro Devices Assurant, Starwood Hotels and Resorts Worldwide, Computer Sciences Corporation, Ameriprise Financial, Wells Fargo",
     authorizationHeader:
@@ -30,6 +33,7 @@ module.exports = {
   },
   Store4: {
     numberStatements: 233,
+    date: "March-May 2020",
     description:
       "233 Statements | March-May 2020 | Overall attitude with customers and colleagues?, How is their work ethic?, Are they likely to pull in others to close sales?, EOG Resources, Johnson Controls, Sherwin-Williams, Con-way, Health Net, Lowe's, Kimberly-Clark",
     authorizationHeader:
