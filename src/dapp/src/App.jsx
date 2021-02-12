@@ -31,6 +31,7 @@ class App extends Component {
   componentDidMount() {
     const offers = getOffers().map((o) => processDescription(o));
     const purchasedOffers = getPurchasedOffers("0x0").map((i) => getOffer(i));
+    purchasedOffers.map((o) => processDescription(o));
     this.setState({
       marketOffers: offers,
       purchasedOffers: purchasedOffers,
@@ -46,7 +47,8 @@ class App extends Component {
     console.log("Clicked offer ", index);
     this.setState({ marketOffers, purchasedOffers });
 
-    //purchaseOffer("0x0", index);
+    purchaseOffer("0x0", index);
+
     //TODO: Call Smart Contract
   };
 
@@ -69,7 +71,15 @@ class App extends Component {
                 />
               )}
             />
-            <Route path="/purchased" component={Purchased} />
+            <Route
+              path="/purchased"
+              render={(props) => (
+                <Purchased
+                  purchasedOffers={this.state.purchasedOffers}
+                  {...props}
+                />
+              )}
+            />
             <Route path="/profile" component={Profile} />
             <Redirect to="/" />
           </Switch>
