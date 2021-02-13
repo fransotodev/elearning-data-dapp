@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import OfferTable from "./common/OfferTable";
 
-import BuyButton from "./BuyButton";
+import Button from "./Button";
 
 function Market({ marketOffers, purchasedOffers, handleBuyButtonClick }) {
   const columns = [
@@ -25,7 +25,13 @@ function Market({ marketOffers, purchasedOffers, handleBuyButtonClick }) {
       name: "",
       path: "",
       content: (data) => {
-        return <BuyButton index={data.index} onClick={handleBuyButtonClick} />;
+        return (
+          <Button
+            index={data.index}
+            onClick={handleBuyButtonClick}
+            text={"BUY"}
+          />
+        );
       },
     },
   ];

@@ -14,7 +14,7 @@ import {
   purchaseOffer,
 } from "./services/fakeOfferService";
 import { get } from "./services/httpService";
-
+import fs from "fs";
 class App extends Component {
   state = {
     purchasedOffers: [],
@@ -53,6 +53,36 @@ class App extends Component {
     //TODO: Call Smart Contract
   };
 
+  downloadObjectAsJson = (exportObj, exportName) => {
+    var dataStr =
+      "data:text/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify(exportObj));
+
+    var downloadAnchorNode = document.createElement("a");
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", exportName + ".json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  };
+
+  handleDownloadDataButtonClick = async (index) => {
+    const offerClicked = this.state.purchasedOffers.find(
+      (o) => o.index === index
+    );
+    // console.log(offerClicked);
+    const { endpointAPI, authorizationHeader } = offerClicked;
+    try {
+      const result = await get(endpointAPI, {
+        headers: { Authorization: authorizationHeader },
+      });
+      const downloadFile = result.data.statements;
+      this.downloadObjectAsJson(downloadFile, `OfferData${index}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -77,6 +107,9 @@ class App extends Component {
               render={(props) => (
                 <Purchased
                   purchasedOffers={this.state.purchasedOffers}
+                  handleDownloadDataButtonClick={
+                    this.handleDownloadDataButtonClick
+                  }
                   {...props}
                 />
               )}

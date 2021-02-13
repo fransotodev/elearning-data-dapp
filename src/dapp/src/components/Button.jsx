@@ -1,11 +1,11 @@
 import React from "react";
 
-function BuyButton({ index, onClick }) {
+function Button({ index, onClick, text }) {
   return (
     <button className="btn btn-primary" onClick={() => onClick(index)}>
-      BUY
+      {text}
     </button>
   );
 }
 
-export default BuyButton;
+export default Button;
