@@ -13,6 +13,7 @@ import {
   getPurchasedOffers,
   purchaseOffer,
 } from "./services/fakeOfferService";
+import { get } from "./services/httpService";
 
 class App extends Component {
   state = {
@@ -28,7 +29,7 @@ class App extends Component {
     this.setState({ marketOffers: newMarketOffers });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const offers = getOffers().map((o) => processDescription(o));
     const purchasedOffers = getPurchasedOffers("0x0").map((i) => getOffer(i));
     purchasedOffers.map((o) => processDescription(o));

@@ -32,7 +32,6 @@ function Purchased({ purchasedOffers }) {
       path: "authorizationHeader",
     },
   ];
-  console.log(purchasedOffers);
   return (
     <React.Fragment>
       <OfferTable columns={columns} data={purchasedOffers} />

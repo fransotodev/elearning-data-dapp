@@ -29,6 +29,7 @@ function Market({ marketOffers, purchasedOffers, handleBuyButtonClick }) {
       },
     },
   ];
+
   return (
     <React.Fragment>
       <OfferTable columns={columns} data={marketOffers} />
