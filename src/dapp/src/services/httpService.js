@@ -9,6 +9,10 @@ axios.interceptors.response.use(null, (error) => {
 export function get(endpoint, config) {
   return axios.get(endpoint, config);
 }
+const defaultExport = {
+  get: get,
+};
+export default defaultExport;
 
 /*
     try {

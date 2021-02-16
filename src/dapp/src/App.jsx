@@ -13,8 +13,9 @@ import {
   getPurchasedOffers,
   purchaseOffer,
 } from "./services/fakeOfferService";
-import { get } from "./services/httpService";
-import fs from "fs";
+import http from "./services/httpService";
+import Modal from "react-bootstrap";
+
 class App extends Component {
   state = {
     purchasedOffers: [],
@@ -73,7 +74,7 @@ class App extends Component {
     // console.log(offerClicked);
     const { endpointAPI, authorizationHeader } = offerClicked;
     try {
-      const result = await get(endpointAPI, {
+      const result = await http.get(endpointAPI, {
         headers: { Authorization: authorizationHeader },
       });
       const downloadFile = result.data.statements;
@@ -83,6 +84,24 @@ class App extends Component {
     }
   };
 
+  /*
+
+  handleVisualizeDataButtonClick = async (index) => {
+    const offerClicked = this.state.purchasedOffers.find(
+      (o) => o.index === index
+    );
+    const { endpointDashboard, authorizationHeader } = offerClicked;
+
+    try {
+      const result = await http.get(endpointDashboard, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
+      console.log(result.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+*/
   render() {
     return (
       <React.Fragment>
@@ -109,6 +128,9 @@ class App extends Component {
                   purchasedOffers={this.state.purchasedOffers}
                   handleDownloadDataButtonClick={
                     this.handleDownloadDataButtonClick
+                  }
+                  handleVisualizeDataButtonClick={
+                    this.handleVisualizeDataButtonClick
                   }
                   {...props}
                 />
