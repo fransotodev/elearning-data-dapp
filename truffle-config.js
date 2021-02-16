@@ -93,4 +93,5 @@ module.exports = {
       // }
     },
   },
+  contracts_build_directory: "./dapp/src/abis/", //So dapp can access them
 };

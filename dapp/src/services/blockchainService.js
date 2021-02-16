@@ -1,6 +1,5 @@
 import Web3 from "web3";
-import ContractJSON from "../../build/contracts/LearningDataContract.json";
-
+import ContractJSON from "../abis/LearningDataContract.json";
 export async function loadWeb3() {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
@@ -23,15 +22,14 @@ export async function testBlockchain() {
   const networkId = await web3.eth.net.getId(); //For ganache, it will be 5777
 
   const networkData = ContractJSON.networks[networkId];
-
   if (networkData) {
     const Contract = new web3.eth.Contract(
       ContractJSON.abi,
       networkData.address
     );
-
-    console.log(Contract.methods.numOffers());
+    const number = await Contract.methods.numOffers().call();
+    console.log(number);
   }
 
-  console.log(accounts);
+  // console.log(accounts);
 }
