@@ -1,5 +1,5 @@
 const Web3 = require("web3");
-const ContractABI = require("../../build/contracts/LearningDataContract.json");
+const ContractABI = require("../build/contracts/LearningDataContract.json");
 const data = require("./data");
 
 function getWeb3() {

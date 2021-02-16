@@ -14,7 +14,8 @@ import {
   purchaseOffer,
 } from "./services/fakeOfferService";
 import http from "./services/httpService";
-import Modal from "react-bootstrap";
+
+import { loadWeb3, testBlockchain } from "./services/blockchainService";
 
 class App extends Component {
   state = {
@@ -38,6 +39,9 @@ class App extends Component {
       marketOffers: offers,
       purchasedOffers: purchasedOffers,
     });
+
+    loadWeb3();
+    testBlockchain();
   }
 
   handleBuyButtonClick = (index) => {
@@ -84,24 +88,6 @@ class App extends Component {
     }
   };
 
-  /*
-
-  handleVisualizeDataButtonClick = async (index) => {
-    const offerClicked = this.state.purchasedOffers.find(
-      (o) => o.index === index
-    );
-    const { endpointDashboard, authorizationHeader } = offerClicked;
-
-    try {
-      const result = await http.get(endpointDashboard, {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      });
-      console.log(result.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-*/
   render() {
     return (
       <React.Fragment>
