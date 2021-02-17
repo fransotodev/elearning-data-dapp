@@ -77,6 +77,19 @@ contract LearningDataContract {
         }
     }
 
+    function getPurchasedOffer(address account) public view returns (uint[] memory){
+        // uint256[] memory test;
+
+        // if(AddressToPurchasedOfferIndexes[account] == test){
+            // return test;
+        // }else{
+            return AddressToPurchasedOfferIndexes[account];
+        // }
+         
+        
+        
+    }
+
     function registerOffer( string memory endpointAPI, string memory endpointDashboard, string memory authorizationHeader, string memory description, uint256 price, address payable[] memory accounts ) public 
     returns (uint256){
         

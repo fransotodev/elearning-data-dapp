@@ -13,14 +13,3 @@ const defaultExport = {
   get: get,
 };
 export default defaultExport;
-
-/*
-    try {
-      const result = await get(endpointAPI, {
-        headers: { Authorization: authorizationHeader },
-      });
-      console.log(result);
-    } catch (error) {
-      console.error(error);
-    }
-*/

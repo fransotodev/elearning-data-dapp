@@ -1,3 +1,4 @@
+//Used to build the dApp before creating the real blockchainService.js
 const STATUS_AVAILABLE = 0;
 const STATUS_PURCHASED = 10;
 

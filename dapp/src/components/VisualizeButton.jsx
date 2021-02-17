@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import Button from "./Button";
+
 function VisualizeButton({
   text,
   title,
@@ -9,10 +9,9 @@ function VisualizeButton({
   index,
 }) {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(endpointDashboard);
+
   return (
     <>
       <button className="btn btn-primary" onClick={handleShow}>
@@ -45,7 +44,3 @@ function VisualizeButton({
 }
 
 export default VisualizeButton;
-
-/*
-
-*/

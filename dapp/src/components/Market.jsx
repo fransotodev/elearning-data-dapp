@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import OfferTable from "./common/OfferTable";
 
 import Button from "./Button";
