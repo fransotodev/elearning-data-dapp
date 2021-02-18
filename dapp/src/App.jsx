@@ -16,12 +16,14 @@ import {
   getOffer,
   getPurchasedOffers,
   purchaseOffer,
+  onEvent,
 } from "./services/blockchainService";
 
 class App extends Component {
   state = {
     purchasedOffers: [],
     marketOffers: [],
+    errors: {},
   };
 
   handlePurchasedOffers = (newPurchasedOffers) => {
@@ -33,23 +35,34 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    loadWeb3();
-    var offers = await getOffers();
-    offers = offers.map((o) => processDescription(o));
+    try {
+      loadWeb3();
+      //onEvent(this.reloadPage); //TODO: Create proper functions to pass onEvent to update only important tables
+      var offers = await getOffers();
+      offers = offers.map((o) => processDescription(o));
 
-    var purchasedOffersIndexes = await getPurchasedOffers();
+      var purchasedOffersIndexes = await getPurchasedOffers();
+      var purchasedOffers = [];
 
-    var purchasedOffers = [];
-    for (var index of purchasedOffersIndexes) {
-      var offer = await getOffer(index);
-      offer = processDescription(offer);
-      purchasedOffers.push(offer);
+      for (var index of purchasedOffersIndexes) {
+        var offer = await getOffer(index);
+        offer = processDescription(offer);
+        purchasedOffers.push(offer);
+      }
+
+      this.setState({
+        marketOffers: offers,
+        purchasedOffers: purchasedOffers,
+        errors: {},
+      });
+    } catch (err) {
+      this.setState({
+        errors: {
+          noWeb3:
+            "Non-Ethereum browser detected. You should consider trying MetaMask!",
+        },
+      });
     }
-
-    this.setState({
-      marketOffers: offers,
-      purchasedOffers: purchasedOffers,
-    });
   }
 
   handleBuyButtonClick = async (index) => {
@@ -57,6 +70,7 @@ class App extends Component {
     const offerClicked = marketOffers.find((o) => o.index === index);
 
     const purchasedOffer = await purchaseOffer(index);
+
     const processedPurchasedOffer = await processDescription(purchasedOffer);
     purchasedOffers.push(processedPurchasedOffer);
 
@@ -82,12 +96,33 @@ class App extends Component {
     }
   };
 
+  setReloadListener = () => {
+    //Reload Application on Metamask Account change
+    window.ethereum.on("accountsChanged", function (accounts) {
+      this.reloadPage();
+    });
+  };
+
+  reloadPage = () => {
+    window.location.reload();
+  };
+
   render() {
+    this.setReloadListener();
+
+    const noErrors = Object.keys(this.state.errors).length === 0;
     return (
       <React.Fragment>
         <main className="container">
-          <Navbar />
+          {noErrors && <Navbar />}
+
           <Switch>
+            <Route
+              path="/info-eth-provider"
+              render={(props) => <h1>Instructions to install Metamask</h1>}
+            />
+
+            {!noErrors && <Redirect to="/info-eth-provider" />}
             <Route exact path="/" component={Home} />
             <Route
               path="/market"

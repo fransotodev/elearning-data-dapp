@@ -6,20 +6,11 @@ TODO:
     
     Separate contractData and contractApp
 
-    Modifier onlyCustodian
     Modifier onlyOwner (if the owner is different from custodian account)
     Modifier isOperational  to pause the contract
 
-   
-   
     ¿withdraw function and mapping with accounts balance? ¿debit before credit?
-    
-    
-    
-    function purchaseOffer
-        //Wait server to call confirmTransaction function a given time, otherwise reject (returns funds)
-                
-        //If the event from custodian is received, it finish, so funds are added to the smart contract account
+     
 */
 
 contract LearningDataContract {
@@ -40,8 +31,8 @@ contract LearningDataContract {
         uint8 status;
     }
 
-    mapping(uint256 => Offer) private IndexToOffer; //Private so it doesn't show endpointAPI to everybody
-    mapping(address => uint256[]) public AddressToPurchasedOfferIndexes;
+    mapping(uint256 => Offer) private IndexToOffer; 
+    mapping(address => uint256[]) private AddressToPurchasedOfferIndexes;
 
     constructor() {
         contractOwner = msg.sender;
@@ -77,17 +68,8 @@ contract LearningDataContract {
         }
     }
 
-    function getPurchasedOffer(address account) public view returns (uint[] memory){
-        // uint256[] memory test;
-
-        // if(AddressToPurchasedOfferIndexes[account] == test){
-            // return test;
-        // }else{
-            return AddressToPurchasedOfferIndexes[account];
-        // }
-         
-        
-        
+    function getPurchasedOffersIndexes(address account) public view returns (uint[] memory){
+            return AddressToPurchasedOfferIndexes[account];                       
     }
 
     function registerOffer( string memory endpointAPI, string memory endpointDashboard, string memory authorizationHeader, string memory description, uint256 price, address payable[] memory accounts ) public 

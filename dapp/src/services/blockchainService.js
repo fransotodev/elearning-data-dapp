@@ -62,15 +62,12 @@ export async function getOffer(id) {
 
 export async function getPurchasedOffers() {
   const { Contract, account } = await createContract();
-  try {
-    const purchasedOffers = await Contract.methods
-      .getPurchasedOffer(account)
-      .call({ from: account });
 
-    return purchasedOffers;
-  } catch (err) {
-    return [];
-  }
+  const purchasedOffers = await Contract.methods
+    .getPurchasedOffersIndexes(account)
+    .call({ from: account });
+  console.log(purchasedOffers);
+  return purchasedOffers;
 }
 
 export async function purchaseOffer(index) {
@@ -98,6 +95,8 @@ async function createContract() {
   const networkId = await web3.eth.net.getId(); //For ganache, it will be 5777
   const accounts = await web3.eth.getAccounts();
   const networkData = ContractJSON.networks[networkId];
+
+  console.log("CUENTA: ", accounts[0]);
   try {
     const Contract = new web3.eth.Contract(
       ContractJSON.abi,
@@ -128,4 +127,15 @@ function mapOffer(offer, index) {
   delete offer["3"];
   delete offer["4"];
   delete offer["5"];
+}
+
+export async function onEvent(cb) {
+  const { Contract, account } = await createContract();
+  Contract.events.OfferRegistered().on("data", (event) => {
+    //cb();
+  });
+
+  Contract.events.OfferPurchased({ filter: { buyer: account } }, (event) => {
+    //cb();
+  });
 }
