@@ -66,7 +66,6 @@ export async function getPurchasedOffers() {
   const purchasedOffers = await Contract.methods
     .getPurchasedOffersIndexes(account)
     .call({ from: account });
-  console.log(purchasedOffers);
   return purchasedOffers;
 }
 
@@ -96,7 +95,7 @@ async function createContract() {
   const accounts = await web3.eth.getAccounts();
   const networkData = ContractJSON.networks[networkId];
 
-  console.log("CUENTA: ", accounts[0]);
+  // console.log("CUENTA: ", accounts[0]);
   try {
     const Contract = new web3.eth.Contract(
       ContractJSON.abi,
@@ -138,4 +137,9 @@ export async function onEvent(cb) {
   Contract.events.OfferPurchased({ filter: { buyer: account } }, (event) => {
     //cb();
   });
+}
+
+export async function getAccount() {
+  const { account } = await createContract();
+  return account;
 }

@@ -47,6 +47,7 @@ function Purchased({
           index={data.index}
           renderDownloadButton={(index) => (
             <Button
+              className="btn-block"
               index={index}
               onClick={handleDownloadDataButtonClick}
               text={"Download"}

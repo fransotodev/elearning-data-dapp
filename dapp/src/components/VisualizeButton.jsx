@@ -33,11 +33,19 @@ function VisualizeButton({
             }}
           />
         </Modal.Body>
-        <button className="btn btn-secondary" onClick={handleClose}>
-          Close
-        </button>
-
-        {renderDownloadButton(index)}
+        <div className="container container-fluid ">
+          <div className="row no-gutter ">
+            <div className="col">
+              <button
+                className="btn btn-secondary btn-block"
+                onClick={handleClose}
+              >
+                Close
+              </button>
+            </div>
+            <div className="col">{renderDownloadButton(index)}</div>
+          </div>
+        </div>
       </Modal>
     </>
   );

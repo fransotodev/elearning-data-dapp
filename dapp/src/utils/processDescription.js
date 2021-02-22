@@ -4,7 +4,9 @@ export default function processDescription(o) {
     o.description = o.description.replace(/^[0-9]* Statements \| /, "");
     o.date = o.description.match(/.*?\|/g)[0].replace(" |", "");
     o.description = o.description.replace(/.*?\| /, "");
-    o.description = o.description.split(",");
+    //o.description = o.description.split(",");
+
+    o.price = `${parseInt(o.price) / 1000000000000000000} ETH`;
   }
   return o;
 }

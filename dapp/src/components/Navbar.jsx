@@ -20,7 +20,7 @@ function Navbar(props) {
       //style={{ backgroundColor: "#78f096" }}
     >
       <div className="container-fluid">
-        <Link className="navbar-brand" style={{ paddingRight: "30px" }} to="/">
+        <Link className="navbar-brand mr-5" to="/">
           <FontAwesomeIcon icon={faHome} size="2x" />
         </Link>
 
@@ -44,14 +44,14 @@ function Navbar(props) {
           <div className="navbar-nav me-auto mb-2 mb-lg-0">
             <NavItem
               path={"/market"}
-              style={{ paddingRight: "15px" }}
+              //style={{ paddingRight: "15px" }}
               icon={faMoneyBill}
               text={"Marketplace"}
               iconPosition={"Left"}
             />
             <NavItem
               path={"/purchased"}
-              style={{ paddingRight: "15px" }}
+              //style={{ paddingRight: "15px" }}
               icon={faWallet}
               text={"Purchased"}
               iconPosition={"Left"}

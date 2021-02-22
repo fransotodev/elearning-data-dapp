@@ -10,11 +10,14 @@ class OfferTable extends Component {
     const { columns, data } = this.props;
     return (
       <>
-        <table className="table table-bordered" style={{ maxWidth: "none" }}>
-          <thead className="">
+        <table className="table ">
+          {/*table-bordered  table-hover*/}
+          <thead className="thead-light">
             <tr>
               {columns.map((column) => (
-                <th key={column.name}>{column.name}</th>
+                <th className="text-center" scope="col" key={column.name}>
+                  {column.name}
+                </th>
               ))}
             </tr>
           </thead>
@@ -22,7 +25,18 @@ class OfferTable extends Component {
             {data.map((item) => (
               <tr key={item.index}>
                 {columns.map((column) => (
-                  <td key={item.index + column.name}>
+                  <td
+                    className="text-center"
+                    key={item.index + column.name}
+                    style={
+                      column.name === "Description"
+                        ? {
+                            width: "40%",
+                            verticalAlign: "middle",
+                          }
+                        : { verticalAlign: "middle" }
+                    }
+                  >
                     {this.renderCell(item, column)}
                   </td>
                 ))}
