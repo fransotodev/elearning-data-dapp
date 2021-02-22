@@ -15,8 +15,9 @@ function Navbar(props) {
 
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-light "
-      style={{ backgroundColor: "#78f096", height: "55px" }}
+      className="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-1 "
+
+      //style={{ backgroundColor: "#78f096" }}
     >
       <div className="container-fluid">
         <Link className="navbar-brand" style={{ paddingRight: "30px" }} to="/">
@@ -70,3 +71,7 @@ function Navbar(props) {
 }
 
 export default Navbar;
+
+/*
+
+*/

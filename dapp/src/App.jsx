@@ -99,7 +99,7 @@ class App extends Component {
   setReloadListener = () => {
     //Reload Application on Metamask Account change
     window.ethereum.on("accountsChanged", function (accounts) {
-      this.reloadPage();
+      window.location.reload();
     });
   };
 
@@ -113,16 +113,17 @@ class App extends Component {
     const noErrors = Object.keys(this.state.errors).length === 0;
     return (
       <React.Fragment>
+        {noErrors && <Navbar />}
         <main className="container">
-          {noErrors && <Navbar />}
-
           <Switch>
-            <Route
-              path="/info-eth-provider"
-              render={(props) => <h1>Instructions to install Metamask</h1>}
-            />
-
+            {!noErrors && (
+              <Route
+                path="/info-eth-provider"
+                render={(props) => <h1>Instructions to install Metamask</h1>}
+              />
+            )}
             {!noErrors && <Redirect to="/info-eth-provider" />}
+
             <Route exact path="/" component={Home} />
             <Route
               path="/market"
