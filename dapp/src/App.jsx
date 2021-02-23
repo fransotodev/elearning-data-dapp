@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import processDescription from "./utils/processDescription";
 import downloadObjectAsJson from "./utils/downloadObjectAsJson";
 import http from "./services/httpService";
+import { ReactComponent as LoadingIcon } from "./assets/Spinner-1s-200px.svg";
 
 import {
   loadWeb3,
@@ -24,6 +25,7 @@ class App extends Component {
     purchasedOffers: [],
     marketOffers: [],
     errors: {},
+    loading: true,
   };
 
   handlePurchasedOffers = (newPurchasedOffers) => {
@@ -54,6 +56,7 @@ class App extends Component {
         marketOffers: offers,
         purchasedOffers: purchasedOffers,
         errors: {},
+        loading: false,
       });
     } catch (err) {
       this.setState({
@@ -61,6 +64,7 @@ class App extends Component {
           noWeb3:
             "Non-Ethereum browser detected. You should consider trying MetaMask!",
         },
+        loading: false,
       });
     }
   }
@@ -107,57 +111,89 @@ class App extends Component {
     window.location.reload();
   };
 
+  renderLoadingIcon = () => {
+    return;
+  };
+
+  renderApp = () => {
+    return <></>;
+  };
+
+  getNumStatementsAccount = () => {
+    if (this.state.purchasedOffers.length === 0) return 0;
+
+    var result = this.state.purchasedOffers.reduce(
+      (acum, current) => (acum += parseInt(current.numStatements)),
+      0
+    );
+    return result;
+  };
+
   render() {
     this.setReloadListener();
-
+    this.getNumStatementsAccount();
     const noErrors = Object.keys(this.state.errors).length === 0;
-    return (
-      <React.Fragment>
-        {noErrors && <Navbar />}
-        <main className="container">
-          <Switch>
-            {!noErrors && (
-              <Route
-                path="/info-eth-provider"
-                render={(props) => <h1>Instructions to install Metamask</h1>}
-              />
-            )}
-            {!noErrors && <Redirect to="/info-eth-provider" />}
 
-            <Route exact path="/" component={Home} />
-            <Route
-              path="/market"
-              render={(props) => (
-                <Market
-                  className="container"
-                  marketOffers={this.state.marketOffers}
-                  purchasedOffers={this.state.purchasedOffers}
-                  handleBuyButtonClick={this.handleBuyButtonClick}
-                  {...props}
+    if (this.state.loading) {
+      return <LoadingIcon />;
+    } else {
+      return (
+        <React.Fragment>
+          {noErrors && <Navbar />}
+
+          <main className="container">
+            <Switch>
+              {!noErrors && (
+                <Route
+                  path="/info-eth-provider"
+                  render={(props) => <h1>Instructions to install Metamask</h1>}
                 />
               )}
-            />
-            <Route
-              path="/purchased"
-              render={(props) => (
-                <Purchased
-                  purchasedOffers={this.state.purchasedOffers}
-                  handleDownloadDataButtonClick={
-                    this.handleDownloadDataButtonClick
-                  }
-                  handleVisualizeDataButtonClick={
-                    this.handleVisualizeDataButtonClick
-                  }
-                  {...props}
-                />
-              )}
-            />
-            <Route path="/profile" component={Profile} />
-            <Redirect to="/" />
-          </Switch>
-        </main>
-      </React.Fragment>
-    );
+              {!noErrors && <Redirect to="/info-eth-provider" />}
+
+              <Route exact path="/" component={Home} />
+              <Route
+                path="/market"
+                render={(props) => (
+                  <Market
+                    className="container"
+                    marketOffers={this.state.marketOffers}
+                    purchasedOffers={this.state.purchasedOffers}
+                    handleBuyButtonClick={this.handleBuyButtonClick}
+                    {...props}
+                  />
+                )}
+              />
+              <Route
+                path="/purchased"
+                render={(props) => (
+                  <Purchased
+                    purchasedOffers={this.state.purchasedOffers}
+                    handleDownloadDataButtonClick={
+                      this.handleDownloadDataButtonClick
+                    }
+                    handleVisualizeDataButtonClick={
+                      this.handleVisualizeDataButtonClick
+                    }
+                    {...props}
+                  />
+                )}
+              />
+              <Route
+                path="/profile"
+                render={() => (
+                  <Profile
+                    numStatements={this.getNumStatementsAccount()}
+                    props
+                  />
+                )}
+              />
+              <Redirect to="/" />
+            </Switch>
+          </main>
+        </React.Fragment>
+      );
+    }
   }
 }
 export default App;

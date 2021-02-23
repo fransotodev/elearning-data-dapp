@@ -143,3 +143,9 @@ export async function getAccount() {
   const { account } = await createContract();
   return account;
 }
+
+export async function getBalanceEth() {
+  const { web3, account } = await createContract();
+  const balance = await web3.eth.getBalance(account);
+  return web3.utils.fromWei(balance);
+}
