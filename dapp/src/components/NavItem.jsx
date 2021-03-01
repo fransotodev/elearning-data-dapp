@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import PropTypes from "prop-types";
 function NavItem({ icon, text, path, style, iconPosition }) {
   return (
     <NavLink className="nav-link mr-3" to={path} style={style}>
@@ -11,5 +11,13 @@ function NavItem({ icon, text, path, style, iconPosition }) {
     </NavLink>
   );
 }
+
+NavItem.propTypes = {
+  icon: PropTypes.object,
+  text: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+  style: PropTypes.object,
+  iconPosition: PropTypes.string.isRequired,
+};
 
 export default NavItem;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-
+import PropTypes from "prop-types";
 function VisualizeButton({
   text,
   title,
@@ -49,6 +49,14 @@ function VisualizeButton({
       </Modal>
     </>
   );
+}
+
+VisualizeButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  endpointDashboard: PropTypes.string.isRequired,
+  renderDownloadButton: PropTypes.func.isRequired,
+  index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 }
 
 export default VisualizeButton;

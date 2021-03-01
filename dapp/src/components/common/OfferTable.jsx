@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 class OfferTable extends Component {
   renderCell(item, column) {
     if (column.content) {
@@ -49,4 +49,9 @@ class OfferTable extends Component {
     );
   }
 }
+OfferTable.propTypes = {
+  columns: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
+};
+
 export default OfferTable;

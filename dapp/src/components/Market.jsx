@@ -1,9 +1,10 @@
 import React from "react";
 import OfferTable from "./common/OfferTable";
+import PropTypes from "prop-types";
 
 import Button from "./Button";
 
-function Market({ marketOffers, purchasedOffers, handleBuyButtonClick }) {
+function Market({ marketOffers, handleBuyButtonClick }) {
   const columns = [
     {
       name: "Statements",
@@ -47,5 +48,10 @@ function Market({ marketOffers, purchasedOffers, handleBuyButtonClick }) {
     </React.Fragment>
   );
 }
+
+Market.propTypes = {
+  marketOffers: PropTypes.array.isRequired,
+  handleBuyButtonClick: PropTypes.func.isRequired,
+};
 
 export default Market;

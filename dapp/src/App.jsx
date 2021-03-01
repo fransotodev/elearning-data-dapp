@@ -17,7 +17,7 @@ import {
   getOffer,
   getPurchasedOffers,
   purchaseOffer,
-  onEvent,
+  //onEvent,
 } from "./services/blockchainService";
 
 class App extends Component {
@@ -156,9 +156,7 @@ class App extends Component {
                 path="/market"
                 render={(props) => (
                   <Market
-                    className="container"
                     marketOffers={this.state.marketOffers}
-                    purchasedOffers={this.state.purchasedOffers}
                     handleBuyButtonClick={this.handleBuyButtonClick}
                     {...props}
                   />
@@ -171,9 +169,6 @@ class App extends Component {
                     purchasedOffers={this.state.purchasedOffers}
                     handleDownloadDataButtonClick={
                       this.handleDownloadDataButtonClick
-                    }
-                    handleVisualizeDataButtonClick={
-                      this.handleVisualizeDataButtonClick
                     }
                     {...props}
                   />
@@ -196,4 +191,5 @@ class App extends Component {
     }
   }
 }
+
 export default App;

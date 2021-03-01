@@ -2,12 +2,9 @@ import React from "react";
 import Button from "./Button";
 import OfferTable from "./common/OfferTable";
 import VisualizeButton from "./VisualizeButton";
+import PropTypes from "prop-types";
 
-function Purchased({
-  purchasedOffers,
-  handleDownloadDataButtonClick,
-  endpointDashboard,
-}) {
+function Purchased({ purchasedOffers, handleDownloadDataButtonClick }) {
   const columns = [
     {
       name: "Statements",
@@ -68,5 +65,10 @@ function Purchased({
     </React.Fragment>
   );
 }
+
+Purchased.propTypes = {
+  purchasedOffers: PropTypes.array.isRequired,
+  handleDownloadDataButtonClick: PropTypes.func.isRequired,
+};
 
 export default Purchased;

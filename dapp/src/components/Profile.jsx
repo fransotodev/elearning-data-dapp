@@ -7,6 +7,7 @@ import {
 import { ReactComponent as LoadingIcon } from "../assets/Spinner-1s-200px.svg";
 import ethCoin from "../assets/ethCoin.png";
 import dataStore from "../assets/dataStore.png";
+import PropTypes from "prop-types";
 
 function Profile({ numStatements }) {
   const [accountData, setAccountData] = useState({});
@@ -24,6 +25,7 @@ function Profile({ numStatements }) {
     }
     fetchDataBlockchain();
   }, []);
+
   if (loading) return <LoadingIcon />;
   else {
     const { address, balance } = accountData;
@@ -89,4 +91,8 @@ function Profile({ numStatements }) {
   }
 }
 
+Profile.propTypes = {
+  numStatements: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+};
 export default Profile;
