@@ -1,8 +1,7 @@
-import React from "react";
-import OfferTable from "./common/OfferTable";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-
 import Button from "./Button";
+import DataScreen from "./common/DataScreen";
 
 function Market({ marketOffers, handleBuyButtonClick }) {
   const columns = [
@@ -16,8 +15,8 @@ function Market({ marketOffers, handleBuyButtonClick }) {
       ),
     },
     {
-      name: "Description",
-      path: "description",
+      name: "Keywords",
+      path: "description", //Inside the blockchain the name is "description"
     },
     {
       name: "Date",
@@ -42,11 +41,7 @@ function Market({ marketOffers, handleBuyButtonClick }) {
     },
   ];
 
-  return (
-    <React.Fragment>
-      <OfferTable columns={columns} data={marketOffers} />
-    </React.Fragment>
-  );
+  return <DataScreen offers={marketOffers} columns={columns} />;
 }
 
 Market.propTypes = {

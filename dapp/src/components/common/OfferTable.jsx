@@ -29,7 +29,7 @@ class OfferTable extends Component {
                     className="text-center"
                     key={item.index + column.name}
                     style={
-                      column.name === "Description"
+                      column.name === "Keywords"
                         ? {
                             width: "40%",
                             verticalAlign: "middle",

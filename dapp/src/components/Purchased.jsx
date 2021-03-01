@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
-import OfferTable from "./common/OfferTable";
 import VisualizeButton from "./VisualizeButton";
 import PropTypes from "prop-types";
+import DataScreen from "./common/DataScreen";
 
 function Purchased({ purchasedOffers, handleDownloadDataButtonClick }) {
   const columns = [
@@ -16,7 +16,7 @@ function Purchased({ purchasedOffers, handleDownloadDataButtonClick }) {
       ),
     },
     {
-      name: "Description",
+      name: "Keywords",
       path: "description",
     },
     {
@@ -59,11 +59,8 @@ function Purchased({ purchasedOffers, handleDownloadDataButtonClick }) {
       ),
     },
   ];
-  return (
-    <React.Fragment>
-      <OfferTable columns={columns} data={purchasedOffers} />
-    </React.Fragment>
-  );
+
+  return <DataScreen offers={purchasedOffers} columns={columns} />;
 }
 
 Purchased.propTypes = {
