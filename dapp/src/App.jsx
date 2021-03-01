@@ -24,7 +24,7 @@ class App extends Component {
   state = {
     purchasedOffers: [],
     marketOffers: [],
-    errors: {},
+    errors: false,
     loading: true,
   };
 
@@ -55,15 +55,12 @@ class App extends Component {
       this.setState({
         marketOffers: offers,
         purchasedOffers: purchasedOffers,
-        errors: {},
+        errors: false,
         loading: false,
       });
     } catch (err) {
       this.setState({
-        errors: {
-          noWeb3:
-            "Non-Ethereum browser detected. You should consider trying MetaMask!",
-        },
+        errors: true,
         loading: false,
       });
     }
@@ -105,6 +102,9 @@ class App extends Component {
     window.ethereum.on("accountsChanged", function (accounts) {
       window.location.reload();
     });
+    window.ethereum.on("chainChanged", function (chainId) {
+      window.location.reload();
+    });
   };
 
   reloadPage = () => {
@@ -132,24 +132,30 @@ class App extends Component {
   render() {
     this.setReloadListener();
     this.getNumStatementsAccount();
-    const noErrors = Object.keys(this.state.errors).length === 0;
+
+    const { errors } = this.state;
 
     if (this.state.loading) {
       return <LoadingIcon />;
     } else {
       return (
         <React.Fragment>
-          {noErrors && <Navbar />}
+          {!errors && <Navbar />}
 
           <main className="container">
             <Switch>
-              {!noErrors && (
+              {errors && (
                 <Route
                   path="/info-eth-provider"
-                  render={(props) => <h1>Instructions to install Metamask</h1>}
+                  render={(props) => (
+                    <h1>
+                      Instructions to install Metamask, connect to the
+                      network...
+                    </h1>
+                  )}
                 />
               )}
-              {!noErrors && <Redirect to="/info-eth-provider" />}
+              {errors && <Redirect to="/info-eth-provider" />}
 
               <Route exact path="/" component={Home} />
               <Route
