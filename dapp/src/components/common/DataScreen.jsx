@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import OfferTable from "./OfferTable";
 import PropTypes from "prop-types";
 import Pagination from "./Pagination";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function filterOffers(marketOffers, query) {
   console.log(marketOffers);
@@ -37,19 +40,26 @@ function DataScreen({ offers, columns }) {
 
   return (
     <>
-      <div className="row mb-2">
-        <div className="col-4">
-          <h3>Total: {filteredOffers.length}</h3>
+      <div className="row m-2">
+        <div className="col-4 ">
+          <div className="input-group-text ml4">
+            <strong>Total: {filteredOffers.length} elements</strong>
+          </div>
         </div>
 
         <div className="col-8">
           <div className="input-group">
-            <div className="input-group-prepend"></div>
+            <div className="input-group-prepend">
+              <span className="input-group-text">
+                {/*<span>Search</span>*/}
+                <FontAwesomeIcon icon={faSearch} size="sm" />
+              </span>
+            </div>
             <input
               type="text"
               className="form-control"
-              placeholder="Search"
-              aria-label="Search"
+              placeholder="Search by Keywords"
+              aria-label="Search by Keywords"
               onChange={(e) => {
                 setQuery(e.target.value);
                 console.log(e.target.value);

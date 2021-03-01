@@ -22,12 +22,12 @@ class Pagination extends Component {
                   : "page-item"
               }
             >
-              <a
+              <button
                 className="page-link"
                 onClick={() => this.props.onPageChange(index + 1)}
               >
                 {index + 1}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
