@@ -1,4 +1,4 @@
-const { chai, assert, expect } = require("../common");
+const { chai, assert, expect } = require("../testCommon");
 
 module.exports = () => {
   it("Is deployed", async () => {

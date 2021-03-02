@@ -3,7 +3,7 @@ const RegisterOfferTests = require("./unit/RegisterOffer.test");
 const PurchaseOfferTests = require("./unit/PurchaseOffer.test");
 const GetOfferTests = require("./unit/GetOffer.test");
 
-const { Config } = require("../config/testConfig");
+const { Config } = require("./testConfig");
 
 contract("Smart Contract tests", async (accounts) => {
   this.config;
