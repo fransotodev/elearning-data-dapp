@@ -90,12 +90,12 @@ export async function purchaseOffer(index) {
 
 export async function registerOffer(offerData) {
   const { Contract, account, web3 } = await createContract();
-
-  //string memory endpointAPI, string memory endpointDashboard, string memory authorizationHeader, string memory description, uint256 price, address payable[] memory accounts
+  console.log(offerData);
+  
   const index = await Contract.methods
     .registerOffer(
       offerData.endpointAPI,
-      offerData.endpointDashBoard,
+      offerData.endpointDashboard,
       offerData.authHeader,
       offerData.description,
       web3.utils.toWei(offerData.price, "Ether"),
