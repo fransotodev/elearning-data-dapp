@@ -88,6 +88,24 @@ export async function purchaseOffer(index) {
   return offerPurchased;
 }
 
+export async function registerOffer(offerData) {
+  const { Contract, account, web3 } = await createContract();
+
+  //string memory endpointAPI, string memory endpointDashboard, string memory authorizationHeader, string memory description, uint256 price, address payable[] memory accounts
+  const index = await Contract.methods
+    .registerOffer(
+      offerData.endpointAPI,
+      offerData.endpointDashBoard,
+      offerData.authHeader,
+      offerData.description,
+      web3.utils.toWei(offerData.price, "Ether"),
+      offerData.accountsToPay
+    )
+    .send({ from: account, gas: 3000000 });
+
+  console.log("Offer registered with index ", index);
+}
+
 async function createContract() {
   const web3 = window.web3;
 

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
+  faPlusCircle,
   faWallet,
   faMoneyBill,
   faUserCircle,
@@ -42,6 +43,13 @@ function Navbar(props) {
           id="navbarSupportedContent"
         >
           <div className="navbar-nav me-auto mb-2 mb-lg-0">
+            <NavItem
+              path={"/new-offer"}
+              icon={faPlusCircle}
+              text={"New Offer"}
+              iconPosition={"Left"}
+            />
+
             <NavItem
               path={"/market"}
               icon={faMoneyBill}

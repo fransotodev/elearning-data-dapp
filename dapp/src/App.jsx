@@ -9,6 +9,7 @@ import processDescription from "./utils/processDescription";
 import downloadObjectAsJson from "./utils/downloadObjectAsJson";
 import http from "./services/httpService";
 import { ReactComponent as LoadingIcon } from "./assets/Spinner-1s-200px.svg";
+import RegisterOffer from "./components/RegisterOffer";
 
 import {
   loadWeb3,
@@ -156,7 +157,6 @@ class App extends Component {
                 />
               )}
               {errors && <Redirect to="/info-eth-provider" />}
-
               <Route exact path="/" component={Home} />
               <Route
                 path="/market"
@@ -180,6 +180,8 @@ class App extends Component {
                   />
                 )}
               />
+              <Route path="/new-offer" component={RegisterOffer} />
+
               <Route
                 path="/profile"
                 render={() => (
