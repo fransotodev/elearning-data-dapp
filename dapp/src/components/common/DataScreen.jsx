@@ -7,18 +7,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function filterOffers(marketOffers, query) {
-  console.log(marketOffers);
   return marketOffers.filter((o) =>
     o.description.toLowerCase().includes(query.toLowerCase())
   );
 }
 
-function pageOffers(offers, currentPage, sizePage) {
-  /* 10 Offers, 4 size
+/*Example: 10 Offers, 4 size
   0-3 currentPage=1
   4-7 currentPage=2
   8-9 currentPage=3
   */
+function pageOffers(offers, currentPage, sizePage) {
   return offers.filter(
     (o, index) =>
       index >= (currentPage - 1) * sizePage && index < currentPage * sizePage
@@ -51,7 +50,6 @@ function DataScreen({ offers, columns }) {
           <div className="input-group">
             <div className="input-group-prepend">
               <span className="input-group-text">
-                {/*<span>Search</span>*/}
                 <FontAwesomeIcon icon={faSearch} size="sm" />
               </span>
             </div>
@@ -62,7 +60,6 @@ function DataScreen({ offers, columns }) {
               aria-label="Search by Keywords"
               onChange={(e) => {
                 setQuery(e.target.value);
-                console.log(e.target.value);
               }}
             />
           </div>

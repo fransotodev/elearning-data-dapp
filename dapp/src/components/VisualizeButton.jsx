@@ -18,7 +18,7 @@ function VisualizeButton({
         {text}
       </button>
 
-      <Modal centered size="lg" show={show} onHide={handleClose}>
+      <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
@@ -57,6 +57,6 @@ VisualizeButton.propTypes = {
   endpointDashboard: PropTypes.string.isRequired,
   renderDownloadButton: PropTypes.func.isRequired,
   index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-}
+};
 
 export default VisualizeButton;

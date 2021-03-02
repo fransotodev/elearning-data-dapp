@@ -90,8 +90,7 @@ export async function purchaseOffer(index) {
 
 export async function registerOffer(offerData) {
   const { Contract, account, web3 } = await createContract();
-  console.log(offerData);
-  
+
   const index = await Contract.methods
     .registerOffer(
       offerData.endpointAPI,
