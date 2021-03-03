@@ -10,11 +10,11 @@ const schema = Joi.object({
     .max(114)
     .required(),
   description: Joi.string().required(),
-  price: Joi.number().greater(0).required(),
   accountsToPay: Joi.array()
     .min(1)
     .items(Joi.string().min(42).max(42))
     .required(),
+  price: Joi.number().greater(0).required(),
 });
 
 export default async function validateFormData(formData) {
@@ -25,31 +25,41 @@ export default async function validateFormData(formData) {
       price: parseInt(formData.price),
     };
 
-    const { error } = schema.validate(parsedFormData);
-    if (error) throw error;
+    const validationResult = schema.validate(parsedFormData);
+
+    const { error } = validationResult;
+    if (error) return validationResult;
 
     const result = await checkEndpointApiAndHeader(
       formData.endpointAPI,
       formData.authHeader
     );
-
     if (result.status >= 200 && result.status < 300) {
-      return true;
+      return validationResult;
     } else {
-      return false;
+      return {
+        details: {
+          0: { path: "General Error", message: "There was an error" },
+        },
+      };
     }
   } catch (error) {
-    console.error(error);
-    return false;
+    return {
+      error: {
+        details: {
+          0: {
+            path: "General Error",
+            message:
+              'There was an error. Make sure "endpoint API" and "Authorization headers" are correct. Also make sure this header has permissions to read data',
+          },
+        },
+      },
+    };
   }
 }
 
-async function checkEndpointApiAndHeader(endpointAPI, authorizationHeader) {
-  try {
-    return await http.get(endpointAPI, {
-      headers: { Authorization: authorizationHeader },
-    });
-  } catch (error) {
-    throw error;
-  }
+function checkEndpointApiAndHeader(endpointAPI, authorizationHeader) {
+  return http.get(endpointAPI, {
+    headers: { Authorization: authorizationHeader },
+  });
 }

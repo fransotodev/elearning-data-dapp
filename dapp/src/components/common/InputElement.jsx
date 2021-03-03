@@ -7,6 +7,7 @@ const InputElement = ({
   itemPrepend,
   helpText,
   extraContent,
+  error,
 }) => {
   return (
     <>
@@ -22,10 +23,12 @@ const InputElement = ({
             onChange={onChange}
             value={inputValue}
           />
+
           {itemPrepend && (
             <div className="input-group-prepend">{itemPrepend}</div>
           )}
         </div>
+        {error && <div className="alert alert-danger">{error}</div>}
 
         {helpText && (
           <div id={`${id}Help`} className="form-text text-muted">

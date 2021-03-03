@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 const RegisterOffer = () => {
   const [typingAccount, setTypingAccount] = useState("");
   const [formData, setFormData] = useState({});
-
+  const [formErrors, setFormErrors] = useState({});
   function handleAddAccount() {
     //Set form data to old form data and then overwrite the property accounttoPay
     if (typingAccount) {
@@ -35,15 +35,51 @@ const RegisterOffer = () => {
     });
   }
 
-  async function handleSubmitOffer() {
-    const result = await validateFormData(formData);
+  function mapIdToMessage(path, message) {
+    const mapNames = {
+      endpointAPI: "Endpoint API",
+      endpointDashboard: "Endpoint Dashboard",
+      authHeader: "Authorization Header",
+      description: "Description",
+      accountsToPay: "Accounts to Pay",
+      price: "Price",
+    };
+    if (Array.isArray(path)) path = path[0];
 
-    if (result) {
-      console.log("Form data is valid");
-      try {
-        await registerOffer(formData, () => {
-          console.log("REGISTER TOAST NOTIFICATION");
-          toast.success("✅ Offer Registered ", {
+    return message.replace(path, mapNames[path]).replace(/\[[0-9]*\]/g, ""); //So accountsToPay[n] goes like accountToPay and the mapping works
+  }
+
+  async function handleSubmitOffer() {
+    try {
+      const result = await validateFormData(formData);
+      const { error } = result;
+      if (error) {
+        var { path, message } = error.details[0];
+        const finalMessage = mapIdToMessage(path, message);
+
+        if (Array.isArray(path)) path = path[0];
+        setFormErrors({
+          [`${path}`]: finalMessage,
+        });
+      } else {
+        try {
+          await registerOffer(formData, () => {
+            console.log("REGISTER TOAST NOTIFICATION");
+            toast.success("✅ Offer Registered ", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+            });
+          });
+          setFormData({});
+          setFormErrors({});
+        } catch (error) {
+          console.log("The offer was not registered toast");
+          toast.error("❌ Registration Cancelled", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -52,22 +88,10 @@ const RegisterOffer = () => {
             draggable: true,
             progress: undefined,
           });
-        });
-        setFormData({});
-      } catch (error) {
-        console.log("The offer was not registered toast");
-        toast.error("❌ Registration Cancelled", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        });
+        }
       }
-    } else {
-      console.log("Form data errors here");
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -78,115 +102,130 @@ const RegisterOffer = () => {
     });
   }
 
+  console.log("ERRORS: ", formErrors);
   return (
-    <div className="container mt-4">
-      <ToastContainer />
-      <div className="form-row">
-        <div className="col-md-6">
-          <InputElement
-            id={"endpointAPI"}
-            labelText={"Endpoint API:"}
-            type={"text"}
-            onChange={handleChangeTyping}
-            inputValue={formData["endpointAPI"] || ""}
-          />
+    <>
+      {formErrors["General Error"] && (
+        <div class="alert alert-danger" role="alert">
+          {formErrors["General Error"]}
+        </div>
+      )}
+      <div className="container mt-4">
+        <ToastContainer />
+        <div className="form-row">
+          <div className="col-md-6">
+            <InputElement
+              id={"endpointAPI"}
+              labelText={"Endpoint API:"}
+              type={"text"}
+              onChange={handleChangeTyping}
+              inputValue={formData["endpointAPI"] || ""}
+              error={formErrors["endpointAPI"]}
+            />
+          </div>
+
+          <div className="col-md-6">
+            <InputElement
+              id={"endpointDashboard"}
+              labelText={"Endpoint Dashboard:"}
+              type={"text"}
+              onChange={handleChangeTyping}
+              inputValue={formData["endpointDashboard"] || ""}
+              error={formErrors["endpointDashboard"]}
+            />
+          </div>
         </div>
 
-        <div className="col-md-6">
-          <InputElement
-            id={"endpointDashboard"}
-            labelText={"Endpoint Dashboard:"}
-            type={"text"}
-            onChange={handleChangeTyping}
-            inputValue={formData["endpointDashboard"] || ""}
-          />
+        {/* Full Width Properties */}
+        <InputElement
+          id={"authHeader"}
+          labelText={"Authorization Header:"}
+          type={"text"}
+          onChange={handleChangeTyping}
+          inputValue={formData["authHeader"] || ""}
+          error={formErrors["authHeader"]}
+          helpText={
+            <>
+              Introduce here an authorization header
+              <strong> created for this particular offer</strong>. The system
+              will validate it can access the data before uploading to the
+              blockchain.
+            </>
+          }
+        />
+
+        <InputElement
+          id={"description"}
+          labelText={"Description:"}
+          type={"text"}
+          onChange={handleChangeTyping}
+          inputValue={formData["description"] || ""}
+          error={formErrors["description"]}
+          helpText={
+            <>
+              Format:{" "}
+              <i>n Statements | Start-end Date | Comma Separated Keywords</i>
+            </>
+          }
+        />
+
+        <div className="form-row">
+          <div className="col-lg-6">
+            <InputElement
+              id={"accountsToPay"}
+              labelText={"Accounts to Pay:"}
+              type={"text"}
+              onChange={handleChangeTypingAccount}
+              inputValue={typingAccount}
+              error={formErrors["accountsToPay"]}
+              itemPrepend={
+                <button className="btn btn-primary" onClick={handleAddAccount}>
+                  Add Address
+                </button>
+              }
+              extraContent={
+                <table className="table ">
+                  <tbody>
+                    {formData.accountsToPay &&
+                      formData.accountsToPay.map((account, index) => (
+                        <tr className="row" key={account}>
+                          <td className="col-10">{account}</td>
+                          <td className="col-2">
+                            <FontAwesomeIcon
+                              onClick={() => handleDeleteAccountFromList(index)}
+                              icon={faTimesCircle}
+                              size="lg"
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              }
+            />
+          </div>
+          <div className="col-lg-6">
+            <InputElement
+              id={"price"}
+              labelText={"Price:"}
+              type={"text"}
+              onChange={handleChangeTyping}
+              inputValue={formData["price"] || ""}
+              error={formErrors["price"]}
+              itemPrepend={<div className="input-group-text">ETH</div>}
+              extraContent={
+                <button
+                  className="btn btn-primary btn-block mt-3"
+                  onClick={handleSubmitOffer}
+                >
+                  Submit Offer
+                </button>
+              }
+            />
+          </div>
         </div>
       </div>
-
-      {/* Full Width Properties */}
-      <InputElement
-        id={"authHeader"}
-        labelText={"Authorization Header:"}
-        type={"text"}
-        onChange={handleChangeTyping}
-        inputValue={formData["authHeader"] || ""}
-        helpText={
-          <>
-            Introduce here an authorization header
-            <strong> created for this particular offer</strong>. The system will
-            validate it can access the data before uploading to the blockchain.
-          </>
-        }
-      />
-
-      <InputElement
-        id={"description"}
-        labelText={"Description:"}
-        type={"text"}
-        onChange={handleChangeTyping}
-        inputValue={formData["description"] || ""}
-        helpText={
-          <>
-            Format:{" "}
-            <i>n Statements | Start-end Date | Comma Separated Keywords</i>
-          </>
-        }
-      />
-
-      <div className="form-row">
-        <div className="col-lg-6">
-          <InputElement
-            id={"accountsToPay"}
-            labelText={"Accounts to Pay:"}
-            type={"text"}
-            onChange={handleChangeTypingAccount}
-            inputValue={typingAccount}
-            itemPrepend={
-              <button className="btn btn-primary" onClick={handleAddAccount}>
-                Add Address
-              </button>
-            }
-            extraContent={
-              <table className="table ">
-                <tbody>
-                  {formData.accountsToPay &&
-                    formData.accountsToPay.map((account, index) => (
-                      <tr className="row" key={account}>
-                        <td className="col-10">{account}</td>
-                        <td className="col-2">
-                          <FontAwesomeIcon
-                            onClick={() => handleDeleteAccountFromList(index)}
-                            icon={faTimesCircle}
-                            size="lg"
-                          />
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            }
-          />
-        </div>
-        <div className="col-lg-6">
-          <InputElement
-            id={"price"}
-            labelText={"Price:"}
-            type={"text"}
-            onChange={handleChangeTyping}
-            inputValue={formData["price"] || ""}
-            itemPrepend={<div className="input-group-text">ETH</div>}
-            extraContent={
-              <button
-                className="btn btn-primary btn-block mt-3"
-                onClick={handleSubmitOffer}
-              >
-                Submit Offer
-              </button>
-            }
-          />
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
