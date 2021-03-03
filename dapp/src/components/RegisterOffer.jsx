@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { registerOffer } from "./../services/blockchainService";
 import validateFormData from "./../utils/validateFormData";
 import InputElement from "./common/InputElement";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+
 const RegisterOffer = () => {
   const [typingAccount, setTypingAccount] = useState("");
   const [formData, setFormData] = useState({});
@@ -40,6 +44,13 @@ const RegisterOffer = () => {
     } else {
       //   console.log("form data is invalid");
     }
+  }
+
+  function handleDeleteAccountFromList(index) {
+    setFormData({
+      ...formData,
+      accountsToPay: formData.accountsToPay.filter((a, i) => i !== index),
+    });
   }
 
   return (
@@ -106,12 +117,23 @@ const RegisterOffer = () => {
               </button>
             }
             extraContent={
-              <ul className="mt-3">
-                {formData.accountsToPay &&
-                  formData.accountsToPay.map((account) => (
-                    <li key={account}>{account}</li>
-                  ))}
-              </ul>
+              <table className="table ">
+                <tbody>
+                  {formData.accountsToPay &&
+                    formData.accountsToPay.map((account, index) => (
+                      <tr className="row" key={account}>
+                        <td className="col-10">{account}</td>
+                        <td className="col-2">
+                          <FontAwesomeIcon
+                            onClick={() => handleDeleteAccountFromList(index)}
+                            icon={faTimesCircle}
+                            size="lg"
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
             }
           />
         </div>
