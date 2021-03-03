@@ -88,7 +88,7 @@ export async function purchaseOffer(index) {
   return offerPurchased;
 }
 
-export async function registerOffer(offerData) {
+export async function registerOffer(offerData, cb = null) {
   const { Contract, account, web3 } = await createContract();
 
   const index = await Contract.methods
@@ -103,6 +103,9 @@ export async function registerOffer(offerData) {
     .send({ from: account, gas: 3000000 });
 
   console.log("Offer registered with index ", index);
+  if (cb) {
+    cb();
+  }
 }
 
 async function createContract() {

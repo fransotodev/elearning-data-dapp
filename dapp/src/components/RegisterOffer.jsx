@@ -3,8 +3,8 @@ import { registerOffer } from "./../services/blockchainService";
 import validateFormData from "./../utils/validateFormData";
 import InputElement from "./common/InputElement";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer, toast } from "react-toastify";
 
 const RegisterOffer = () => {
   const [typingAccount, setTypingAccount] = useState("");
@@ -39,10 +39,35 @@ const RegisterOffer = () => {
     const result = await validateFormData(formData);
 
     if (result) {
-      //   console.log("Form data is valid");
-      registerOffer(formData);
+      console.log("Form data is valid");
+      try {
+        await registerOffer(formData, () => {
+          console.log("REGISTER TOAST NOTIFICATION");
+          toast.success("✅ Offer Registered ", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          });
+        });
+        setFormData({});
+      } catch (error) {
+        console.log("The offer was not registered toast");
+        toast.error("❌ Registration Cancelled", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     } else {
-      //   console.log("form data is invalid");
+      console.log("Form data errors here");
     }
   }
 
@@ -55,6 +80,7 @@ const RegisterOffer = () => {
 
   return (
     <div className="container mt-4">
+      <ToastContainer />
       <div className="form-row">
         <div className="col-md-6">
           <InputElement
@@ -62,6 +88,7 @@ const RegisterOffer = () => {
             labelText={"Endpoint API:"}
             type={"text"}
             onChange={handleChangeTyping}
+            inputValue={formData["endpointAPI"] || ""}
           />
         </div>
 
@@ -71,6 +98,7 @@ const RegisterOffer = () => {
             labelText={"Endpoint Dashboard:"}
             type={"text"}
             onChange={handleChangeTyping}
+            inputValue={formData["endpointDashboard"] || ""}
           />
         </div>
       </div>
@@ -81,6 +109,7 @@ const RegisterOffer = () => {
         labelText={"Authorization Header:"}
         type={"text"}
         onChange={handleChangeTyping}
+        inputValue={formData["authHeader"] || ""}
         helpText={
           <>
             Introduce here an authorization header
@@ -95,6 +124,7 @@ const RegisterOffer = () => {
         labelText={"Description:"}
         type={"text"}
         onChange={handleChangeTyping}
+        inputValue={formData["description"] || ""}
         helpText={
           <>
             Format:{" "}
@@ -143,6 +173,7 @@ const RegisterOffer = () => {
             labelText={"Price:"}
             type={"text"}
             onChange={handleChangeTyping}
+            inputValue={formData["price"] || ""}
             itemPrepend={<div className="input-group-text">ETH</div>}
             extraContent={
               <button
