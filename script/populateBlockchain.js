@@ -21,8 +21,11 @@ function fetchContract(web3) {
     var netId = await web3.eth.net.getId();
     var netData = ContractABI.networks[netId];
     if (netData) {
-      var DataMarket = new web3.eth.Contract(ContractABI.abi, netData.address);
-      resolve(DataMarket);
+      var LearningDataContract = new web3.eth.Contract(
+        ContractABI.abi,
+        netData.address
+      );
+      resolve(LearningDataContract);
     } else {
       reject("Contract has not been deployed to detected network");
     }
@@ -36,10 +39,12 @@ async function populate(cb) {
     const endpointAPI = data.endpointAPI;
     const endpointDashboard = data[`Store${i}`].endpointDashboard;
     const authorizationHeader = data[`Store${i}`].authorizationHeader;
-    const description = data[`Store${i}`].description;
+    const description = `${data[`Store${i}`].numberStatements} Statements | ${
+      data[`Store${i}`].date
+    } | ${data[`Store${i}`].keywords}`;
 
-    const number = data[`Store${i}`].numberStatements / 100;
-    const price = web3.utils.toWei(number.toString(), "Ether");
+    const priceEth = data[`Store${i}`].numberStatements / 100;
+    const priceWei = web3.utils.toWei(priceEth.toString(), "Ether");
 
     await LearningDataContract.methods
       .registerOffer(
@@ -47,7 +52,7 @@ async function populate(cb) {
         endpointDashboard,
         authorizationHeader,
         description,
-        price,
+        priceWei,
         accountsToPay
       )
       .send({ from: accounts[0], gas: 3000000 });
