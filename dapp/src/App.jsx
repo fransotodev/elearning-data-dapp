@@ -9,7 +9,7 @@ import processDescription from "./utils/processDescription";
 import downloadObjectAsJson from "./utils/downloadObjectAsJson";
 import http from "./services/httpService";
 import { ReactComponent as LoadingIcon } from "./assets/Spinner-1s-200px.svg";
-import RegisterOffer from "./components/RegisterOffer";
+import RegisterOfferForm from "./components/RegisterOfferForm";
 
 import {
   loadWeb3,
@@ -180,7 +180,7 @@ class App extends Component {
                   />
                 )}
               />
-              <Route path="/new-offer" component={RegisterOffer} />
+              <Route path="/new-offer" component={RegisterOfferForm} />
 
               <Route
                 path="/profile"

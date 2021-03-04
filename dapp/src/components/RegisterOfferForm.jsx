@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { registerOffer } from "./../services/blockchainService";
-import validateFormData from "./../utils/validateFormData";
+import { registerOffer } from "../services/blockchainService";
+import validateFormData from "../utils/validateFormData";
 import InputElement from "./common/InputElement";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
+import generateDescription from "../utils/generateDescription";
 
-const RegisterOffer = () => {
+const RegisterOfferForm = () => {
   const [typingAccount, setTypingAccount] = useState("");
   const [formData, setFormData] = useState({});
   const [formErrors, setFormErrors] = useState({});
@@ -63,9 +64,13 @@ const RegisterOffer = () => {
         });
       } else {
         try {
-          await registerOffer(formData, () => {
-            console.log("REGISTER TOAST NOTIFICATION");
-            toast.success("✅ Offer Registered ", {
+          const description = await generateDescription(
+            formData.endpointAPI,
+            formData.authHeader
+          );
+          const offerData = { ...formData, description: description };
+          await registerOffer(offerData, () => {
+            toast.success(`✅ Offer Registered`, {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -78,7 +83,6 @@ const RegisterOffer = () => {
           setFormData({});
           setFormErrors({});
         } catch (error) {
-          console.log("The offer was not registered toast");
           toast.error("❌ Registration Cancelled", {
             position: "top-right",
             autoClose: 5000,
@@ -102,7 +106,6 @@ const RegisterOffer = () => {
     });
   }
 
-  console.log("ERRORS: ", formErrors);
   return (
     <>
       {formErrors["General Error"] && (
@@ -154,20 +157,16 @@ const RegisterOffer = () => {
           }
         />
 
-        <InputElement
+        {/* <InputElement
           id={"description"}
           labelText={"Description:"}
           type={"text"}
           onChange={handleChangeTyping}
-          inputValue={formData["description"] || ""}
+          inputValue={formData["description"] || "Auto Generated"}
           error={formErrors["description"]}
-          helpText={
-            <>
-              Format:{" "}
-              <i>n Statements | Start-end Date | Comma Separated Keywords</i>
-            </>
-          }
-        />
+          helpText={<>Auto Generated</>}
+          disabled={true}
+        /> */}
 
         <div className="form-row">
           <div className="col-lg-6">
@@ -229,4 +228,4 @@ const RegisterOffer = () => {
   );
 };
 
-export default RegisterOffer;
+export default RegisterOfferForm;

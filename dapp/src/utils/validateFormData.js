@@ -9,7 +9,7 @@ const schema = Joi.object({
     .min(114)
     .max(114)
     .required(),
-  description: Joi.string().required(),
+  description: Joi.string(),
   accountsToPay: Joi.array()
     .min(1)
     .items(Joi.string().min(42).max(42))

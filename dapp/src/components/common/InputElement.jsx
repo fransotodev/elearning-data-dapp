@@ -8,6 +8,7 @@ const InputElement = ({
   helpText,
   extraContent,
   error,
+  disabled = false,
 }) => {
   return (
     <>
@@ -17,6 +18,7 @@ const InputElement = ({
         </label>
         <div className="input-group ">
           <input
+            disabled={disabled}
             type={type}
             className="form-control "
             id={id}
