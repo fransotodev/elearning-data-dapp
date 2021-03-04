@@ -64,7 +64,6 @@ export default async function generateDescription(
   )} ${minDate.getFullYear()} - ${mapMonth(
     maxDate.getMonth()
   )} ${maxDate.getFullYear()}`;
-  console.log(statementList.data.length);
 
   /*---------------------------------------Counting All Activities by name---------------------------------------*/
   let countNames = new Map();
@@ -98,7 +97,6 @@ export default async function generateDescription(
       }
     }
   }
-  console.log(countNames);
   let arrayNames = Array.from(countNames.keys());
   let arrayActivities = arrayNames.map((k) => ({
     name: k,
