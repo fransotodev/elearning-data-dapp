@@ -4,7 +4,7 @@ import validateFormData from "../utils/validateFormData";
 import InputElement from "./common/InputElement";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import generateDescription from "../utils/generateDescription";
 
 const RegisterOfferForm = () => {
@@ -109,12 +109,11 @@ const RegisterOfferForm = () => {
   return (
     <>
       {formErrors["General Error"] && (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           {formErrors["General Error"]}
         </div>
       )}
       <div className="container mt-4">
-        <ToastContainer />
         <div className="form-row">
           <div className="col-md-6">
             <InputElement

@@ -10,7 +10,7 @@ import downloadObjectAsJson from "./utils/downloadObjectAsJson";
 import http from "./services/httpService";
 import { ReactComponent as LoadingIcon } from "./assets/Spinner-1s-200px.svg";
 import RegisterOfferForm from "./components/RegisterOfferForm";
-
+import { ToastContainer } from "react-toastify";
 import {
   loadWeb3,
   //numOffers,
@@ -130,6 +130,20 @@ class App extends Component {
     return result;
   };
 
+  renderToastContainer = () => (
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss={false}
+      draggable
+      pauseOnHover={false}
+    />
+  );
+
   render() {
     this.setReloadListener();
     this.getNumStatementsAccount();
@@ -144,6 +158,7 @@ class App extends Component {
           {!errors && <Navbar />}
 
           <main className="container">
+            {this.renderToastContainer()}
             <Switch>
               {errors && (
                 <Route
@@ -180,7 +195,12 @@ class App extends Component {
                   />
                 )}
               />
-              <Route path="/new-offer" component={RegisterOfferForm} />
+              <Route
+                path="/new-offer"
+                render={() => (
+                  <RegisterOfferForm /*createToast={this.createToast}*/ props />
+                )}
+              />
 
               <Route
                 path="/profile"
