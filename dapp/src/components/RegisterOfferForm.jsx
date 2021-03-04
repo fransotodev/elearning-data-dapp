@@ -7,10 +7,14 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import generateDescription from "../utils/generateDescription";
 
+import { ReactComponent as LoadingIcon } from "./../assets/Spinner-1s-200px.svg";
+
 const RegisterOfferForm = () => {
   const [typingAccount, setTypingAccount] = useState("");
   const [formData, setFormData] = useState({});
   const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
   function handleAddAccount() {
     //Set form data to old form data and then overwrite the property accounttoPay
     if (typingAccount) {
@@ -52,9 +56,11 @@ const RegisterOfferForm = () => {
 
   async function handleSubmitOffer() {
     try {
+      setLoading(true);
       const result = await validateFormData(formData);
       const { error } = result;
       if (error) {
+        setLoading(false);
         var { path, message } = error.details[0];
         const finalMessage = mapIdToMessage(path, message);
 
@@ -82,7 +88,9 @@ const RegisterOfferForm = () => {
           });
           setFormData({});
           setFormErrors({});
+          setLoading(false);
         } catch (error) {
+          setLoading(false);
           toast.error("❌ Registration Cancelled", {
             position: "top-right",
             autoClose: 5000,
@@ -95,6 +103,7 @@ const RegisterOfferForm = () => {
         }
       }
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   }
@@ -113,6 +122,7 @@ const RegisterOfferForm = () => {
           {formErrors["General Error"]}
         </div>
       )}
+
       <div className="container mt-4">
         <div className="form-row">
           <div className="col-md-6">
@@ -215,8 +225,16 @@ const RegisterOfferForm = () => {
                 <button
                   className="btn btn-primary btn-block mt-3"
                   onClick={handleSubmitOffer}
+                  disabled={loading}
                 >
-                  Submit Offer
+                  <span
+                    className={
+                      loading
+                        ? " spinner-border spinner-border-sm mr-2"
+                        : "mr-2"
+                    }
+                  ></span>
+                  {loading ? "Sending Offer..." : "Submit Offer"}
                 </button>
               }
             />
