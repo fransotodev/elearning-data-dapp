@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 const ProfileCard = ({ mainText, secondText, thirdText, image }) => {
   return (
     <div className="col  bg-light">
@@ -31,4 +31,10 @@ const ProfileCard = ({ mainText, secondText, thirdText, image }) => {
   );
 };
 
+ProfileCard.propTypes = {
+  mainText: PropTypes.string.isRequired,
+  secondText: PropTypes.string.isRequired,
+  thirdText: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+};
 export default ProfileCard;

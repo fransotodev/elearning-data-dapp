@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 const InputElement = ({
   id,
   labelText,
@@ -44,4 +45,16 @@ const InputElement = ({
   );
 };
 
+InputElement.propTypes = {
+  id: PropTypes.string.isRequired,
+  labelText: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  inputValue: PropTypes.string.isRequired,
+  itemPrepend: PropTypes.node,
+  helpText: PropTypes.node,
+  extraContent: PropTypes.node,
+  error: PropTypes.string,
+  disabled: PropTypes.bool,
+};
 export default InputElement;

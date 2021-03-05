@@ -41,7 +41,7 @@ function DataScreen({ offers, columns }) {
     <>
       <div className="row m-2">
         <div className="col-4 ">
-          <div className="input-group-text ml4">
+          <div className="input-group-text " style={{ minWidth: "150px" }}>
             <strong>Total: {filteredOffers.length} elements</strong>
           </div>
         </div>
