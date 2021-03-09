@@ -15,12 +15,8 @@ function Navbar() {
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-1 "
-
-      //style={{ backgroundColor: "#78f096" }}
-    >
-      <div className="container-fluid">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-1 ">
+      <div className="container">
         <Link className="navbar-brand mr-5" to="/">
           <FontAwesomeIcon icon={faHome} size="2x" />
         </Link>
@@ -48,6 +44,7 @@ function Navbar() {
               icon={faPlusCircle}
               text={"New Offer"}
               iconPosition={"Left"}
+              onClick={handleNavCollapse}
             />
 
             <NavItem
@@ -55,12 +52,14 @@ function Navbar() {
               icon={faMoneyBill}
               text={"Marketplace"}
               iconPosition={"Left"}
+              onClick={handleNavCollapse}
             />
             <NavItem
               path={"/purchased"}
               icon={faWallet}
               text={"Purchased"}
               iconPosition={"Left"}
+              onClick={handleNavCollapse}
             />
             <NavItem
               path={"/profile"}
@@ -68,6 +67,7 @@ function Navbar() {
               icon={faUserCircle}
               text={"Profile"}
               iconPosition={"Right"}
+              onClick={handleNavCollapse}
             />
           </div>
         </div>

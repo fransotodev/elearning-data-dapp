@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 function Button({ index, onClick, text, className }) {
   return (
@@ -17,7 +16,7 @@ Button.propTypes = {
   index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Button;

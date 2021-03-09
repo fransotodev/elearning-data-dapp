@@ -2,9 +2,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
-function NavItem({ icon, text, path, style, iconPosition }) {
+function NavItem({ icon, text, path, style, iconPosition, onClick }) {
   return (
-    <NavLink className="nav-link mr-3" to={path} style={style}>
+    <NavLink
+      onClick={onClick}
+      className="nav-link mr-3"
+      to={path}
+      style={style}
+    >
       {iconPosition === "Right" && <strong>{text}</strong>}
       <FontAwesomeIcon className="mr-2 ml-2" icon={icon} size="lg" />
       {iconPosition === "Left" && <strong>{text}</strong>}

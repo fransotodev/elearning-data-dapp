@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "./Button";
 import VisualizeButton from "./VisualizeButton";
 import PropTypes from "prop-types";

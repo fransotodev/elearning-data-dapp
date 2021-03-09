@@ -1,4 +1,3 @@
-import { array } from "joi";
 import http from "./../services/httpService";
 
 function getDomain(endpointAPI) {

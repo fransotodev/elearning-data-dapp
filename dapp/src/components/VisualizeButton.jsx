@@ -34,7 +34,7 @@ function VisualizeButton({
           />
         </Modal.Body>
         <div className="container container-fluid ">
-          <div className="row no-gutter ">
+          <div className="row no-gutter mb-3 ">
             <div className="col">
               <button
                 className="btn btn-secondary btn-block"

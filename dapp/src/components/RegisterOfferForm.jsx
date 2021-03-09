@@ -7,8 +7,6 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import generateDescription from "../utils/generateDescription";
 
-import { ReactComponent as LoadingIcon } from "./../assets/Spinner-1s-200px.svg";
-
 const RegisterOfferForm = () => {
   const [typingAccount, setTypingAccount] = useState("");
   const [formData, setFormData] = useState({});
