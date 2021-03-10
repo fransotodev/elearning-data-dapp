@@ -18,8 +18,12 @@ import {
   getOffer,
   getPurchasedOffers,
   purchaseOffer,
+  getContractStatus,
+  isContractOwner,
+  setContractStatus,
   //onEvent,
 } from "./services/blockchainService";
+import OwnerMenu from "./components/OwnerMenu";
 
 class App extends Component {
   state = {
@@ -27,6 +31,8 @@ class App extends Component {
     marketOffers: [],
     errors: false,
     loading: true,
+    fullContractStopped: false,
+    isOwner: false,
   };
 
   handlePurchasedOffers = (newPurchasedOffers) => {
@@ -41,24 +47,34 @@ class App extends Component {
     try {
       loadWeb3();
       //onEvent(this.reloadPage); //TODO: Create proper functions to pass onEvent to update only important tables
-      var offers = await getOffers();
-      offers = offers.map((o) => processDescription(o));
+      const isOwner = await isContractOwner();
+      if ((await getContractStatus()) !== "Stopped") {
+        var offers = await getOffers();
+        offers = offers.map((o) => processDescription(o));
 
-      var purchasedOffersIndexes = await getPurchasedOffers();
-      var purchasedOffers = [];
+        var purchasedOffersIndexes = await getPurchasedOffers();
+        var purchasedOffers = [];
 
-      for (var index of purchasedOffersIndexes) {
-        var offer = await getOffer(index);
-        offer = processDescription(offer);
-        purchasedOffers.push(offer);
+        for (var index of purchasedOffersIndexes) {
+          var offer = await getOffer(index);
+          offer = processDescription(offer);
+          purchasedOffers.push(offer);
+        }
+
+        this.setState({
+          marketOffers: offers,
+          purchasedOffers: purchasedOffers,
+          errors: false,
+          loading: false,
+          fullContractStopped: false,
+          isOwner: isOwner,
+        });
+      } else {
+        this.setState({
+          fullContractStopped: true,
+          isOwner: isOwner,
+        });
       }
-
-      this.setState({
-        marketOffers: offers,
-        purchasedOffers: purchasedOffers,
-        errors: false,
-        loading: false,
-      });
     } catch (err) {
       this.setState({
         errors: true,
@@ -99,13 +115,15 @@ class App extends Component {
   };
 
   setReloadListener = () => {
-    //Reload Application on Metamask Account change
-    window.ethereum.on("accountsChanged", function (accounts) {
-      window.location.reload();
-    });
-    window.ethereum.on("chainChanged", function (chainId) {
-      window.location.reload();
-    });
+    if (window.ethereum) {
+      //Reload Application on Metamask Account change
+      window.ethereum.on("accountsChanged", function (accounts) {
+        window.location.reload();
+      });
+      window.ethereum.on("chainChanged", function (chainId) {
+        window.location.reload();
+      });
+    }
   };
 
   reloadPage = () => {
@@ -144,13 +162,30 @@ class App extends Component {
     />
   );
 
+  handleButtonClick = async (text) => {
+    await setContractStatus(text);
+    window.location.reload();
+  };
+
   render() {
     this.setReloadListener();
     this.getNumStatementsAccount();
 
     const { errors } = this.state;
 
-    if (this.state.loading) {
+    if (this.state.fullContractStopped) {
+      return (
+        <>
+          <h1> This website is stopped by Owner</h1>
+          {this.state.isOwner && (
+            <OwnerMenu
+              contractStatus={"Stopped"}
+              handleButtonClick={this.handleButtonClick}
+            />
+          )}
+        </>
+      );
+    } else if (this.state.loading) {
       return <LoadingIcon />;
     } else {
       return (

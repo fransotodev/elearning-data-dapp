@@ -55,7 +55,7 @@ async function populate(cb) {
         priceWei,
         accountsToPay
       )
-      .send({ from: accounts[0], gas: 3000000 });
+      .send({ from: accounts[3], gas: 3000000 });
   }
 
   cb();

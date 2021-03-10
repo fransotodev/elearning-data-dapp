@@ -12,7 +12,7 @@ contract LearningDataContract is Ownable, ReentrancyGuard {
     Counters.Counter private counterOffers;
 
     enum ContractStatus {Active, OnlyQueries, Stopped}
-    ContractStatus contractStatus = ContractStatus.Active;
+    ContractStatus private contractStatus = ContractStatus.Active;
 
     enum OfferStatus {Available, Purchased}
 
@@ -71,6 +71,14 @@ contract LearningDataContract is Ownable, ReentrancyGuard {
 
     function setStatusStopped() public onlyOwner {
         contractStatus = ContractStatus.Stopped;
+    }
+
+    function getContractStatus() public view returns (string memory) {
+        if (contractStatus == ContractStatus.Active) return "Active";
+        else if (contractStatus == ContractStatus.OnlyQueries)
+            return "OnlyQueries";
+        else if (contractStatus == ContractStatus.Stopped) return "Stopped";
+        else return "Unknown";
     }
 
     function numOffers() public view returns (uint256) {

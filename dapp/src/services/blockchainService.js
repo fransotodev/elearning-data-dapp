@@ -28,6 +28,37 @@ export async function testBlockchain() {
   console.log("NUMOFFERS: ", numberOffers);
 }
 
+export async function isContractOwner() {
+  const { Contract, account } = await createContract();
+  const owner = await Contract.methods.owner().call();
+  console.log(owner);
+  return account === owner;
+}
+
+export async function getContractStatus() {
+  const { Contract } = await createContract();
+  const result = await Contract.methods.getContractStatus().call();
+  console.log("REULST: ", result);
+  return result;
+}
+
+export async function setContractStatus(status) {
+  const { Contract, account } = await createContract();
+  console.log(status);
+  switch (status) {
+    case "Active":
+      await Contract.methods.setStatusActive().send({ from: account });
+      break;
+    case "OnlyQueries":
+      await Contract.methods.setStatusOnlyQueries().send({ from: account });
+      break;
+    case "Stopped":
+      await Contract.methods.setStatusStopped().send({ from: account });
+      break;
+    default:
+  }
+}
+
 export async function numOffers() {
   const { Contract } = await createContract();
 

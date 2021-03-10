@@ -3,12 +3,21 @@ import {
   getAccount,
   getPurchasedOffers,
   getBalanceEth,
+  isContractOwner,
+  getContractStatus,
+  setContractStatus,
 } from "../services/blockchainService";
 import { ReactComponent as LoadingIcon } from "../assets/Spinner-1s-200px.svg";
 import ethCoin from "../assets/ethCoin.png";
 import dataStore from "../assets/dataStore.png";
 import PropTypes from "prop-types";
 import ProfileCard from "./common/ProfileCard";
+import OwnerMenu from "./OwnerMenu";
+
+async function handleButtonClick(text) {
+  await setContractStatus(text);
+  window.location.reload();
+}
 
 function Profile({ numStatements }) {
   const [accountData, setAccountData] = useState({});
@@ -19,7 +28,9 @@ function Profile({ numStatements }) {
     async function fetchDataBlockchain() {
       const address = await getAccount();
       const balance = await getBalanceEth();
-      setAccountData({ address, balance });
+      const isOwner = await isContractOwner();
+      const contractStatus = await getContractStatus();
+      setAccountData({ address, balance, isOwner, contractStatus });
       const numberOffers = await getPurchasedOffers();
       setNumOffers(numberOffers.length || 0);
       setLoading(false);
@@ -29,22 +40,32 @@ function Profile({ numStatements }) {
 
   if (loading) return <LoadingIcon />;
   else {
-    const { address, balance } = accountData;
+    const { address, balance, isOwner, contractStatus } = accountData;
+
     return (
-      <div className="row text-center mt-4">
-        <ProfileCard
-          mainText={"Your Account"}
-          secondText={address}
-          thirdText={`${balance} ETH`}
-          image={ethCoin}
-        />
-        <ProfileCard
-          mainText={"Purchased Data"}
-          secondText={`${numOffers} Offers`}
-          thirdText={`${numStatements} Statements`}
-          image={dataStore}
-        />
-      </div>
+      <>
+        {isOwner && (
+          <OwnerMenu
+            contractStatus={contractStatus}
+            handleButtonClick={handleButtonClick}
+          />
+        )}
+
+        <div className="row text-center mt-4">
+          <ProfileCard
+            mainText={"Your Account"}
+            secondText={address}
+            thirdText={`${balance} ETH`}
+            image={ethCoin}
+          />
+          <ProfileCard
+            mainText={"Purchased Data"}
+            secondText={`${numOffers} Offers`}
+            thirdText={`${numStatements} Statements`}
+            image={dataStore}
+          />
+        </div>
+      </>
     );
   }
 }

@@ -17,7 +17,7 @@ const ProfileCard = ({ mainText, secondText, thirdText, image }) => {
             <strong>{thirdText}</strong>
           </h1>
           <img
-            className="img-fluid"
+            className="img-fluid mb-2"
             style={{
               // marginLeft: "40%",
               width: "150px",
