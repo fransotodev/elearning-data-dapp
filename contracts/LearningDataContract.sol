@@ -30,10 +30,6 @@ contract LearningDataContract is Ownable, ReentrancyGuard {
     mapping(uint256 => Offer) private IndexToOffer;
     mapping(address => uint256[]) private AddressToPurchasedOfferIndexes;
 
-    // constructor() {
-    //     // numOffers = 0;
-    // }
-
     event OfferRegistered(
         uint256 index,
         string description,
