@@ -2,6 +2,7 @@ const GeneralTests = require("./unit/General.test");
 const RegisterOfferTests = require("./unit/RegisterOffer.test");
 const PurchaseOfferTests = require("./unit/PurchaseOffer.test");
 const GetOfferTests = require("./unit/GetOffer.test");
+const AdvancedFeaturesTests = require("./unit/AdvancedFeatures.test");
 
 const { Config } = require("./testConfig");
 
@@ -43,4 +44,6 @@ contract("Smart Contract tests", async (accounts) => {
   describe("purchaseOffer() tests", PurchaseOfferTests.bind(this));
 
   describe("getOffer() tests", GetOfferTests.bind(this));
+
+  describe("Advanced features tests", AdvancedFeaturesTests.bind(this));
 });

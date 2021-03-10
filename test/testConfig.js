@@ -25,7 +25,7 @@ var Config = async function (accounts) {
     },
     nullAccount: "0x0000000000000000000000000000000000000000",
     STATUS_AVAILABLE: 0,
-    STATUS_PURCHASED: 10,
+    STATUS_PURCHASED: 1,
   };
 };
 

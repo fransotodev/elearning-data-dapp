@@ -2,7 +2,7 @@ import Web3 from "web3";
 import ContractJSON from "../abis/LearningDataContract.json";
 
 const STATUS_AVAILABLE = 0;
-const STATUS_PURCHASED = 10;
+const STATUS_PURCHASED = 1;
 
 export async function loadWeb3() {
   if (window.ethereum) {
