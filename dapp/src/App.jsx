@@ -1,17 +1,21 @@
+import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+
 import Home from "./components/Home";
 import Market from "./components/Market";
 import Purchased from "./components/Purchased";
 import Profile from "./components/Profile";
-import React, { Component } from "react";
 import Navbar from "./components/Navbar";
+import RegisterOfferForm from "./components/RegisterOfferForm";
+import ContractStatus from "./components/common/ContractStatus";
+import RenderToastContainer from "./components/common/RenderToastContainer";
+import Info from "./components/Info";
+
 import processDescription from "./utils/processDescription";
 import downloadObjectAsJson from "./utils/downloadObjectAsJson";
 import http from "./services/httpService";
 import { ReactComponent as LoadingIcon } from "./assets/Spinner-1s-200px.svg";
-import RegisterOfferForm from "./components/RegisterOfferForm";
-import ContractStatus from "./components/common/ContractStatus";
-import RenderToastContainer from "./components/common/RenderToastContainer";
+
 import {
   loadWeb3,
   //numOffers,
@@ -182,15 +186,7 @@ class App extends Component {
 
               {/* ------------------------------INFO------------------------------ */}
               {errors && (
-                <Route
-                  path="/info-eth-provider"
-                  render={(props) => (
-                    <h1>
-                      Instructions to install Metamask, connect to the
-                      network...
-                    </h1>
-                  )}
-                />
+                <Route path="/info-eth-provider" render={(props) => <Info />} />
               )}
               {errors && <Redirect to="/info-eth-provider" />}
 
