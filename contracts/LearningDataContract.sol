@@ -9,11 +9,7 @@ contract LearningDataContract is Ownable, ReentrancyGuard {
     using SafeMath for uint256;
     using Counters for Counters.Counter;
 
-    Counters.Counter private counterOffers;
-
     enum ContractStatus {Active, OnlyQueries, Stopped}
-    ContractStatus private contractStatus = ContractStatus.Active;
-
     enum OfferStatus {Available, Purchased}
 
     struct Offer {
@@ -27,9 +23,6 @@ contract LearningDataContract is Ownable, ReentrancyGuard {
         uint8 status;
     }
 
-    mapping(uint256 => Offer) private IndexToOffer;
-    mapping(address => uint256[]) private AddressToPurchasedOfferIndexes;
-
     event OfferRegistered(
         uint256 index,
         string description,
@@ -38,6 +31,12 @@ contract LearningDataContract is Ownable, ReentrancyGuard {
         address buyer,
         uint8 status
     );
+
+    ContractStatus private contractStatus = ContractStatus.Active;
+    Counters.Counter private counterOffers;
+
+    mapping(uint256 => Offer) private IndexToOffer;
+    mapping(address => uint256[]) private AddressToPurchasedOfferIndexes;
 
     event OfferPurchased(
         uint256 index,

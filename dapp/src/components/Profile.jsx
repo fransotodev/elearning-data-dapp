@@ -3,8 +3,6 @@ import {
   getAccount,
   getPurchasedOffers,
   getBalanceEth,
-  isContractOwner,
-  getContractStatus,
   setContractStatus,
 } from "../services/blockchainService";
 import { ReactComponent as LoadingIcon } from "../assets/Spinner-1s-200px.svg";
