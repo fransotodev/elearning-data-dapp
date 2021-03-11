@@ -13,8 +13,8 @@ export async function loadWeb3() {
     window.web3 = new Web3(window.web3.currentProvider);
     console.log("Loaded currentProvider");
   } else {
-    window.alert(
-      "Non-Ethereum browser detected. You should consider trying MetaMask!"
+    console.warn(
+      "Non-Ethereum browser detected. You should consider using MetaMask"
     );
   }
 }

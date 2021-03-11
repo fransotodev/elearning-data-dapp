@@ -33,7 +33,7 @@ const OwnerMenu = ({ contractStatus, handleButtonClick }) => {
   }
   return (
     <>
-      <div className="jumbotron jumbotron-fluid bg-light">
+      <div className="jumbotron jumbotron-fluid bg-white">
         <ContractStatus color={color} contractStatus={contractStatus} />
         {renderStatusButtons()}
       </div>

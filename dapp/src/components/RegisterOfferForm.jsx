@@ -114,7 +114,7 @@ const RegisterOfferForm = () => {
   }
 
   return (
-    <>
+    <div className="container">
       {formErrors["General Error"] && (
         <div className="alert alert-danger" role="alert">
           {formErrors["General Error"]}
@@ -239,7 +239,7 @@ const RegisterOfferForm = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

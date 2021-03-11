@@ -23,7 +23,7 @@ const ProfileCard = ({ mainText, secondText, thirdText, image }) => {
               width: "150px",
             }}
             src={image}
-            alt="Eth Coin"
+            alt="Card Image"
           />
         </div>
       </div>

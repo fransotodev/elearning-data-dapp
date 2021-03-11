@@ -171,12 +171,15 @@ class App extends Component {
     } else {
       return (
         <>
-          {!errors && <Navbar />}
+          <Navbar />
 
-          <main className="container">
+          <main>
             <RenderToastContainer />
 
             <Switch>
+              {/* ------------------------------HOME------------------------------ */}
+              <Route exact path="/" component={Home} />
+
               {/* ------------------------------INFO------------------------------ */}
               {errors && (
                 <Route
@@ -190,9 +193,6 @@ class App extends Component {
                 />
               )}
               {errors && <Redirect to="/info-eth-provider" />}
-
-              {/* ------------------------------HOME------------------------------ */}
-              <Route exact path="/" component={Home} />
 
               {/* ------------------------------MARKET------------------------------ */}
               <Route

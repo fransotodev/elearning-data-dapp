@@ -41,7 +41,11 @@ function Market({ marketOffers, handleBuyButtonClick }) {
     },
   ];
 
-  return <DataScreen offers={marketOffers} columns={columns} />;
+  return (
+    <div className="container">
+      <DataScreen offers={marketOffers} columns={columns} />
+    </div>
+  );
 }
 
 Market.propTypes = {

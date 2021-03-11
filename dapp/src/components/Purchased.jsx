@@ -60,7 +60,11 @@ function Purchased({ purchasedOffers, handleDownloadDataButtonClick }) {
     },
   ];
 
-  return <DataScreen offers={purchasedOffers} columns={columns} />;
+  return (
+    <div className="container">
+      <DataScreen offers={purchasedOffers} columns={columns} />
+    </div>
+  );
 }
 
 Purchased.propTypes = {

@@ -42,7 +42,7 @@ function Profile({ numStatements, isOwner, contractStatus }) {
     const { address, balance } = accountData;
 
     return (
-      <>
+      <div className="container">
         {isOwner && (
           <OwnerMenu
             contractStatus={contractStatus}
@@ -64,7 +64,7 @@ function Profile({ numStatements, isOwner, contractStatus }) {
             image={dataStore}
           />
         </div>
-      </>
+      </div>
     );
   }
 }
