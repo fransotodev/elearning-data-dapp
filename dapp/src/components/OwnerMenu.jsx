@@ -1,5 +1,6 @@
 import React from "react";
 import StatusButton from "./common/StatusButton";
+import ContractStatus from "./common/ContractStatus";
 const OwnerMenu = ({ contractStatus, handleButtonClick }) => {
   const mappingTypes = {
     Active: "success",
@@ -33,16 +34,7 @@ const OwnerMenu = ({ contractStatus, handleButtonClick }) => {
   return (
     <>
       <div className="jumbotron jumbotron-fluid bg-light">
-        <div className="container text-center">
-          <h1>
-            <strong>Contract Status: </strong>
-            <span className={` mb-5 badge badge-${color}`}>
-              {contractStatus === "OnlyQueries"
-                ? "Queries Only"
-                : contractStatus}
-            </span>
-          </h1>
-        </div>
+        <ContractStatus color={color} contractStatus={contractStatus} />
         {renderStatusButtons()}
       </div>
     </>

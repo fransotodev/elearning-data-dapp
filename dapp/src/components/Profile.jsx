@@ -19,7 +19,7 @@ async function handleButtonClick(text) {
   window.location.reload();
 }
 
-function Profile({ numStatements }) {
+function Profile({ numStatements, isOwner, contractStatus }) {
   const [accountData, setAccountData] = useState({});
   const [numOffers, setNumOffers] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -28,9 +28,8 @@ function Profile({ numStatements }) {
     async function fetchDataBlockchain() {
       const address = await getAccount();
       const balance = await getBalanceEth();
-      const isOwner = await isContractOwner();
-      const contractStatus = await getContractStatus();
-      setAccountData({ address, balance, isOwner, contractStatus });
+
+      setAccountData({ address, balance });
       const numberOffers = await getPurchasedOffers();
       setNumOffers(numberOffers.length || 0);
       setLoading(false);
@@ -40,7 +39,7 @@ function Profile({ numStatements }) {
 
   if (loading) return <LoadingIcon />;
   else {
-    const { address, balance, isOwner, contractStatus } = accountData;
+    const { address, balance } = accountData;
 
     return (
       <>

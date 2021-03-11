@@ -10,7 +10,8 @@ import downloadObjectAsJson from "./utils/downloadObjectAsJson";
 import http from "./services/httpService";
 import { ReactComponent as LoadingIcon } from "./assets/Spinner-1s-200px.svg";
 import RegisterOfferForm from "./components/RegisterOfferForm";
-import { ToastContainer } from "react-toastify";
+import ContractStatus from "./components/common/ContractStatus";
+import RenderToastContainer from "./components/common/RenderToastContainer";
 import {
   loadWeb3,
   //numOffers,
@@ -31,7 +32,7 @@ class App extends Component {
     marketOffers: [],
     errors: false,
     loading: true,
-    fullContractStopped: false,
+    contractStatus: "Active",
     isOwner: false,
   };
 
@@ -46,9 +47,10 @@ class App extends Component {
   async componentDidMount() {
     try {
       loadWeb3();
-      //onEvent(this.reloadPage); //TODO: Create proper functions to pass onEvent to update only important tables
+      //onEvent(() => window.location.reload())); //TODO: Create proper functions to pass onEvent to update only important tables
       const isOwner = await isContractOwner();
-      if ((await getContractStatus()) !== "Stopped") {
+      const contractStatus = await getContractStatus();
+      if (contractStatus !== "Stopped") {
         var offers = await getOffers();
         offers = offers.map((o) => processDescription(o));
 
@@ -66,12 +68,12 @@ class App extends Component {
           purchasedOffers: purchasedOffers,
           errors: false,
           loading: false,
-          fullContractStopped: false,
+          contractStatus: contractStatus,
           isOwner: isOwner,
         });
       } else {
         this.setState({
-          fullContractStopped: true,
+          contractStatus: contractStatus,
           isOwner: isOwner,
         });
       }
@@ -126,18 +128,6 @@ class App extends Component {
     }
   };
 
-  reloadPage = () => {
-    window.location.reload();
-  };
-
-  renderLoadingIcon = () => {
-    return;
-  };
-
-  renderApp = () => {
-    return <></>;
-  };
-
   getNumStatementsAccount = () => {
     if (this.state.purchasedOffers.length === 0) return 0;
 
@@ -148,21 +138,7 @@ class App extends Component {
     return result;
   };
 
-  renderToastContainer = () => (
-    <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss={false}
-      draggable
-      pauseOnHover={false}
-    />
-  );
-
-  handleButtonClick = async (text) => {
+  handleChangeStatusButtonClick = async (text) => {
     await setContractStatus(text);
     window.location.reload();
   };
@@ -173,14 +149,19 @@ class App extends Component {
 
     const { errors } = this.state;
 
-    if (this.state.fullContractStopped) {
+    if (this.state.contractStatus === "Stopped") {
       return (
         <>
-          <h1> This website is stopped by Owner</h1>
+          <h1 style={{ textAlign: "center" }}>
+            This website is stopped by Owner
+          </h1>
+          {!this.state.isOwner && (
+            <ContractStatus color={"danger"} contractStatus={"Stopped"} />
+          )}
           {this.state.isOwner && (
             <OwnerMenu
               contractStatus={"Stopped"}
-              handleButtonClick={this.handleButtonClick}
+              handleButtonClick={this.handleChangeStatusButtonClick}
             />
           )}
         </>
@@ -189,12 +170,14 @@ class App extends Component {
       return <LoadingIcon />;
     } else {
       return (
-        <React.Fragment>
+        <>
           {!errors && <Navbar />}
 
           <main className="container">
-            {this.renderToastContainer()}
+            <RenderToastContainer />
+
             <Switch>
+              {/* ------------------------------INFO------------------------------ */}
               {errors && (
                 <Route
                   path="/info-eth-provider"
@@ -207,7 +190,11 @@ class App extends Component {
                 />
               )}
               {errors && <Redirect to="/info-eth-provider" />}
+
+              {/* ------------------------------HOME------------------------------ */}
               <Route exact path="/" component={Home} />
+
+              {/* ------------------------------MARKET------------------------------ */}
               <Route
                 path="/market"
                 render={(props) => (
@@ -218,6 +205,8 @@ class App extends Component {
                   />
                 )}
               />
+
+              {/* ------------------------------PURCHASED------------------------------ */}
               <Route
                 path="/purchased"
                 render={(props) => (
@@ -230,6 +219,7 @@ class App extends Component {
                   />
                 )}
               />
+              {/* ------------------------------NEW OFFER------------------------------ */}
               <Route
                 path="/new-offer"
                 render={() => (
@@ -237,19 +227,23 @@ class App extends Component {
                 )}
               />
 
+              {/* ------------------------------PROFILE------------------------------ */}
               <Route
                 path="/profile"
                 render={() => (
                   <Profile
                     numStatements={this.getNumStatementsAccount()}
+                    isOwner={this.state.isOwner}
+                    contractStatus={this.state.contractStatus}
                     props
                   />
                 )}
               />
+              {/* ------------------------------DEFAULT------------------------------  */}
               <Redirect to="/" />
             </Switch>
           </main>
-        </React.Fragment>
+        </>
       );
     }
   }
