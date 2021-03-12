@@ -1,5 +1,5 @@
 const Web3 = require("web3");
-const ContractABI = require("../dapp/src/abis/LearningDataContract.json");
+const CompiledContract = require("../dapp/src/contracts_build/LearningDataSmartContract.json");
 const data = require("./data");
 
 function getWeb3() {
@@ -19,10 +19,10 @@ function closeWeb3(web3) {
 function fetchContract(web3) {
   return new Promise(async (resolve, reject) => {
     var netId = await web3.eth.net.getId();
-    var netData = ContractABI.networks[netId];
+    var netData = CompiledContract.networks[netId];
     if (netData) {
       var LearningDataContract = new web3.eth.Contract(
-        ContractABI.abi,
+        CompiledContract.abi,
         netData.address
       );
       resolve(LearningDataContract);

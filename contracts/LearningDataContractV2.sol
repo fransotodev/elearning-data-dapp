@@ -5,7 +5,7 @@ import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol
 import "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 
-contract LearningDataContract is
+contract LearningDataContractV2 is
     Initializable,
     OwnableUpgradeable,
     ReentrancyGuardUpgradeable
@@ -228,5 +228,9 @@ contract LearningDataContract is
             IndexToOffer[index].endpointDashboard,
             IndexToOffer[index].authorizationHeader
         );
+    }
+
+    function returnString() public pure returns (string memory) {
+        return "Hello World, this is contract V2, nice upgrade!!";
     }
 }

@@ -1,5 +1,5 @@
 import Web3 from "web3";
-import ContractJSON from "../abis/LearningDataContract.json";
+import ContractJSON from "../contracts_build/LearningDataSmartContract.json";
 
 const STATUS_AVAILABLE = 0;
 const STATUS_PURCHASED = 1;
@@ -31,14 +31,21 @@ export async function testBlockchain() {
 export async function isContractOwner() {
   const { Contract, account } = await createContract();
   const owner = await Contract.methods.owner().call();
-  console.log(owner);
+  // console.log(">>>", );
+  try {
+    const result = await Contract.methods.returnString().call();
+    console.log(result);
+  } catch (err) {
+    console.error(err);
+  }
+  console.log("OWNER: ", owner);
   return account === owner;
 }
 
 export async function getContractStatus() {
   const { Contract } = await createContract();
   const result = await Contract.methods.getContractStatus().call();
-  console.log("REULST: ", result);
+
   return result;
 }
 
@@ -145,8 +152,6 @@ async function createContract() {
   const networkId = await web3.eth.net.getId(); //For ganache, it will be 5777
   const accounts = await web3.eth.getAccounts();
   const networkData = ContractJSON.networks[networkId];
-
-  // console.log("CUENTA: ", accounts[0]);
   try {
     const Contract = new web3.eth.Contract(
       ContractJSON.abi,
