@@ -32,7 +32,7 @@ function fetchContract(web3) {
   });
 }
 
-async function populate(cb) {
+async function populate(web3, LearningDataContract, accounts, cb) {
   const accountsToPay = [accounts[8], accounts[9]];
 
   for (var i = 1; i <= 4; i++) {
@@ -62,11 +62,11 @@ async function populate(cb) {
 }
 
 async function main() {
-  this.web3 = getWeb3();
-  this.LearningDataContract = await fetchContract(web3);
-  this.accounts = await web3.eth.getAccounts();
+  let web3 = getWeb3();
+  let LearningDataContract = await fetchContract(web3);
+  let accounts = await web3.eth.getAccounts();
 
-  populate.bind(this)(async () => {
+  populate(web3, LearningDataContract, accounts, async () => {
     const numOffers = await LearningDataContract.methods.numOffers().call();
     console.log(numOffers, "offers:");
 
