@@ -91,22 +91,33 @@ class App extends Component {
   handleBuyButtonClick = async (index) => {
     const { marketOffers, purchasedOffers } = this.state;
     const offerClicked = marketOffers.find((o) => o.index === index);
+    try {
+      const purchasedOffer = await purchaseOffer(index);
+      toast.success(`✅ Offer Purchased`, {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+      const processedPurchasedOffer = await processDescription(purchasedOffer);
+      purchasedOffers.push(processedPurchasedOffer);
+      marketOffers.splice(marketOffers.indexOf(offerClicked), 1);
 
-    const purchasedOffer = await purchaseOffer(index);
-    toast.success(`✅ Offer Purchased`, {
-      position: "top-right",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
-    const processedPurchasedOffer = await processDescription(purchasedOffer);
-    purchasedOffers.push(processedPurchasedOffer);
-    marketOffers.splice(marketOffers.indexOf(offerClicked), 1);
-
-    this.setState({ marketOffers, purchasedOffers });
+      this.setState({ marketOffers, purchasedOffers });
+    } catch (err) {
+      toast.error(`❌ Purchase Cancelled`, {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   handleDownloadDataButtonClick = async (index) => {
