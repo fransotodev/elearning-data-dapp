@@ -1,0 +1,21 @@
+---
+test:
+  name: LearningDataContract Benchmark - Ganache Simulation
+  description: Benchmark for LearningDataContract Ethereum Smart Contract
+  workers:
+    type: local
+    number: 1
+  rounds:
+    #---------------------------------------------------------------Register increasing send rate:---------------------------------------------------------------
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 20
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 10 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+

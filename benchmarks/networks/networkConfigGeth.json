@@ -1,0 +1,23 @@
+{
+    "caliper": {
+        "blockchain": "ethereum"
+    },
+    "ethereum": {
+        "url": "ws://localhost:8011",
+        "contractDeployerAddress": "0xdbA9A8E631585FdF48c511C25999f840473Ca6A4",
+        "contractDeployerAddressPassword": "password1",
+        "fromAddress": "0xdbA9A8E631585FdF48c511C25999f840473Ca6A4",
+        "fromAddressPassword": "password1",
+        "transactionConfirmationBlocks": 1,
+        "contracts": {
+            "LearningDataContract": {
+                "estimateGas": true,
+                "path": "contracts/LearningDataContract.json",
+                "gas": {
+                    "register": 3000000,
+                    "offer": 3000000 
+                }
+            }
+        }
+    }
+}

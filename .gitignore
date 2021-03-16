@@ -170,11 +170,10 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/node,soliditytruffle,windows,vscode
 
-#Compiled contracts folder:
-dapp/src/contracts_build/
 
 #Upgradeable development network file:
 .openzeppelin/unknown-*.json
 
-#Temporal files to interact with the blockchain (deleted when everything is working)
-temporal_files/*
+#Not classified report and logs from benchmark:
+benchmarks/caliper.log
+benchmarks/report.html

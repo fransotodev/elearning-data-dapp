@@ -1,0 +1,25 @@
+{
+    "caliper": {
+        "blockchain": "ethereum"
+    },
+    "ethereum": {
+        "url": "ws://localhost:8545",
+        "contractDeployerAddress": "0x18251E4dCcfcf8F68fE500381ce418ac3b6E24DF",
+        "contractDeployerAddressPrivateKey": "0xa59324a90dfcb998dc126ab493e485dffded6fffa5dcd91900e6f6a34f793662",
+        "contractDeployerAddressPassword": "",
+        "fromAddress": "0x18251E4dCcfcf8F68fE500381ce418ac3b6E24DF",
+        "fromAddressPrivateKey": "0xa59324a90dfcb998dc126ab493e485dffded6fffa5dcd91900e6f6a34f793662",
+        "fromAddressPassword": "",
+        "transactionConfirmationBlocks": 1,
+        "contracts": {
+            "LearningDataContract": {
+                "estimateGas": true,
+                "path": "contracts/LearningDataSmartContract.json",
+                "gas": {
+                    "register": 3000000,
+                    "offer": 3000000 
+                }
+            }
+        }
+    }
+}
