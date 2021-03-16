@@ -184,17 +184,6 @@ function mapOffer(offer, index) {
   delete offer["5"];
 }
 
-export async function onEvent(cb) {
-  const { Contract, account } = await createContract();
-  Contract.events.OfferRegistered().on("data", (event) => {
-    //cb();
-  });
-
-  Contract.events.OfferPurchased({ filter: { buyer: account } }, (event) => {
-    //cb();
-  });
-}
-
 export async function getAccount() {
   const { account } = await createContract();
   return account;

@@ -26,7 +26,7 @@ import {
   getContractStatus,
   isContractOwner,
   setContractStatus,
-  //onEvent,
+  // onEvent,
 } from "./services/blockchainService";
 import OwnerMenu from "./components/OwnerMenu";
 
@@ -40,18 +40,17 @@ class App extends Component {
     isOwner: false,
   };
 
-  handlePurchasedOffers = (newPurchasedOffers) => {
-    this.setState({ purchasedOffers: newPurchasedOffers });
-  };
+  updateBlockchainOffers = async () => {
+    var offers = await getOffers();
+    offers = offers.map((o) => processDescription(o));
 
-  handleMarketOffers = (newMarketOffers) => {
-    this.setState({ marketOffers: newMarketOffers });
+    this.setState({ marketOffers: offers });
   };
 
   async componentDidMount() {
     try {
       loadWeb3();
-      //onEvent(() => window.location.reload())); //TODO: Create proper functions to pass onEvent to update only important tables
+
       const isOwner = await isContractOwner();
       const contractStatus = await getContractStatus();
       if (contractStatus !== "Stopped") {
@@ -94,7 +93,6 @@ class App extends Component {
     const offerClicked = marketOffers.find((o) => o.index === index);
 
     const purchasedOffer = await purchaseOffer(index);
-    console.log("Purchased");
     toast.success(`✅ Offer Purchased`, {
       position: "top-right",
       autoClose: 4000,
@@ -227,7 +225,10 @@ class App extends Component {
               <Route
                 path="/new-offer"
                 render={() => (
-                  <RegisterOfferForm /*createToast={this.createToast}*/ props />
+                  <RegisterOfferForm
+                    updateBlockchainOffers={this.updateBlockchainOffers}
+                    props
+                  />
                 )}
               />
 

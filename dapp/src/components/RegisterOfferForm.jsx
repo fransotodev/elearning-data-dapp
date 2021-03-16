@@ -7,7 +7,7 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import generateDescription from "../utils/generateDescription";
 
-const RegisterOfferForm = () => {
+const RegisterOfferForm = ({ updateBlockchainOffers }) => {
   const [typingAccount, setTypingAccount] = useState("");
   const [formData, setFormData] = useState({});
   const [formErrors, setFormErrors] = useState({});
@@ -87,6 +87,7 @@ const RegisterOfferForm = () => {
               draggable: true,
               progress: undefined,
             });
+            updateBlockchainOffers();
           });
           setFormData({});
           setFormErrors({});
