@@ -10,6 +10,7 @@ const InputElement = ({
   extraContent,
   error,
   disabled = false,
+  onKeyDown,
 }) => {
   return (
     <>
@@ -25,6 +26,7 @@ const InputElement = ({
             id={id}
             onChange={onChange}
             value={inputValue}
+            onKeyDown={onKeyDown}
           />
 
           {itemPrepend && (

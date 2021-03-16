@@ -13,6 +13,10 @@ const RegisterOfferForm = () => {
   const [formErrors, setFormErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
+  const handleKeyDown = ({ key }) => {
+    if (key === "Enter") handleAddAccount();
+  };
+
   function handleAddAccount() {
     //Set form data to old form data and then overwrite the property accounttoPay
     if (typingAccount) {
@@ -164,17 +168,6 @@ const RegisterOfferForm = () => {
           }
         />
 
-        {/* <InputElement
-          id={"description"}
-          labelText={"Description:"}
-          type={"text"}
-          onChange={handleChangeTyping}
-          inputValue={formData["description"] || "Auto Generated"}
-          error={formErrors["description"]}
-          helpText={<>Auto Generated</>}
-          disabled={true}
-        /> */}
-
         <div className="form-row">
           <div className="col-lg-6">
             <InputElement
@@ -184,6 +177,7 @@ const RegisterOfferForm = () => {
               onChange={handleChangeTypingAccount}
               inputValue={typingAccount}
               error={formErrors["accountsToPay"]}
+              onKeyDown={handleKeyDown}
               itemPrepend={
                 <button className="btn btn-primary" onClick={handleAddAccount}>
                   Add Address
