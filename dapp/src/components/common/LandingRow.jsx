@@ -1,6 +1,6 @@
 import React from "react";
 
-const LandingRow = ({ text1, text2, text3, image, leftAlignment }) => {
+const LandingRow = ({ text1, text2, text3, image, leftAlignment, onLoad }) => {
   return (
     <>
       <div className="row featurette">
@@ -23,6 +23,7 @@ const LandingRow = ({ text1, text2, text3, image, leftAlignment }) => {
             style={{ width: "500px" }}
             src={image}
             alt="Decentralized"
+            onLoad={onLoad}
           />
         </div>
       </div>
