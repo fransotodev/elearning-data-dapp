@@ -80,7 +80,7 @@ const RegisterOfferForm = () => {
           await registerOffer(offerData, () => {
             toast.success(`✅ Offer Registered`, {
               position: "top-right",
-              autoClose: 5000,
+              autoClose: 4000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: false,
@@ -95,7 +95,7 @@ const RegisterOfferForm = () => {
           setLoading(false);
           toast.error("❌ Registration Cancelled", {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 4000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,

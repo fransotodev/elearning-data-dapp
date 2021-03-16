@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Home from "./components/Home";
 import Market from "./components/Market";
@@ -15,7 +16,6 @@ import processDescription from "./utils/processDescription";
 import downloadObjectAsJson from "./utils/downloadObjectAsJson";
 import http from "./services/httpService";
 import { ReactComponent as LoadingIcon } from "./assets/Spinner-1s-200px.svg";
-
 import {
   loadWeb3,
   //numOffers,
@@ -94,10 +94,18 @@ class App extends Component {
     const offerClicked = marketOffers.find((o) => o.index === index);
 
     const purchasedOffer = await purchaseOffer(index);
-
+    console.log("Purchased");
+    toast.success(`✅ Offer Purchased`, {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
     const processedPurchasedOffer = await processDescription(purchasedOffer);
     purchasedOffers.push(processedPurchasedOffer);
-
     marketOffers.splice(marketOffers.indexOf(offerClicked), 1);
 
     this.setState({ marketOffers, purchasedOffers });
