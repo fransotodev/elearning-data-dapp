@@ -36,6 +36,15 @@ contract LearningDataContract is
         uint8 status
     );
 
+    event OfferPurchased(
+        uint256 index,
+        string description,
+        uint256 price,
+        address payable[] accountsToPay,
+        address buyer,
+        uint8 status
+    );
+
     CountersUpgradeable.Counter private counterOffers;
     ContractStatus private contractStatus;
 
@@ -47,15 +56,6 @@ contract LearningDataContract is
         __ReentrancyGuard_init();
         contractStatus = ContractStatus.Active;
     }
-
-    event OfferPurchased(
-        uint256 index,
-        string description,
-        uint256 price,
-        address payable[] accountsToPay,
-        address buyer,
-        uint8 status
-    );
 
     modifier isQueryActive() {
         require(
