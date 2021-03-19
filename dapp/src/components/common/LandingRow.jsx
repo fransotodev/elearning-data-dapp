@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const LandingRow = ({ text1, text2, text3, image, leftAlignment, onLoad }) => {
   return (
@@ -31,4 +32,12 @@ const LandingRow = ({ text1, text2, text3, image, leftAlignment, onLoad }) => {
   );
 };
 
+LandingRow.propTypes = {
+  text1: PropTypes.string,
+  text2: PropTypes.string,
+  text3: PropTypes.string,
+  image: PropTypes.object,
+  leftAlignment: PropTypes.bool,
+  onLoad: PropTypes.func,
+};
 export default LandingRow;

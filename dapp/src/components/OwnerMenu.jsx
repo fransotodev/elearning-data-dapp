@@ -1,6 +1,8 @@
 import React from "react";
 import StatusButton from "./common/StatusButton";
 import ContractStatus from "./common/ContractStatus";
+import PropTypes from "prop-types";
+
 const OwnerMenu = ({ contractStatus, handleButtonClick }) => {
   const mappingTypes = {
     Active: "success",
@@ -39,6 +41,11 @@ const OwnerMenu = ({ contractStatus, handleButtonClick }) => {
       </div>
     </>
   );
+};
+
+OwnerMenu.propTypes = {
+  contractStatus: PropTypes.string.isRequired,
+  handleButtonClick: PropTypes.func.isRequired,
 };
 
 export default OwnerMenu;

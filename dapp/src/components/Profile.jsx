@@ -70,5 +70,7 @@ function Profile({ numStatements, isOwner, contractStatus }) {
 Profile.propTypes = {
   numStatements: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
+  isOwner: PropTypes.bool.isRequired,
+  contractStatus: PropTypes.string.isRequired,
 };
 export default Profile;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const StatusButton = ({ type, text, color, current, onClick }) => {
   const buttonDisabled = current ? "disabled" : "";
@@ -22,6 +23,14 @@ const StatusButton = ({ type, text, color, current, onClick }) => {
       </button>
     </div>
   );
+};
+
+StatusButton.propTypes = {
+  type: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  current: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default StatusButton;

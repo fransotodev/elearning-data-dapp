@@ -23,6 +23,7 @@ NavItem.propTypes = {
   path: PropTypes.string.isRequired,
   style: PropTypes.object,
   iconPosition: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default NavItem;

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import generateDescription from "../utils/generateDescription";
+import PropTypes from "prop-types";
 
 const RegisterOfferForm = ({ updateBlockchainOffers }) => {
   const [typingAccount, setTypingAccount] = useState("");
@@ -236,6 +237,10 @@ const RegisterOfferForm = ({ updateBlockchainOffers }) => {
       </div>
     </div>
   );
+};
+
+RegisterOfferForm.propTypes = {
+  updateBlockchainOffers: PropTypes.func,
 };
 
 export default RegisterOfferForm;

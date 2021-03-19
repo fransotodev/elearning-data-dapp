@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ContractStatus = ({ color, contractStatus }) => {
   return (
@@ -11,6 +12,11 @@ const ContractStatus = ({ color, contractStatus }) => {
       </h1>{" "}
     </div>
   );
+};
+
+ContractStatus.propTypes = {
+  color: PropTypes.string.isRequired,
+  contractStatus: PropTypes.string.isRequired,
 };
 
 export default ContractStatus;

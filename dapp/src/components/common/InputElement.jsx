@@ -58,5 +58,6 @@ InputElement.propTypes = {
   extraContent: PropTypes.node,
   error: PropTypes.string,
   disabled: PropTypes.bool,
+  onKeyDown: PropTypes.func,
 };
 export default InputElement;

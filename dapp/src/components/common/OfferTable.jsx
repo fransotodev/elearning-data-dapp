@@ -11,7 +11,6 @@ class OfferTable extends Component {
     return (
       <>
         <table className="table ">
-          {/*table-bordered  table-hover*/}
           <thead className="thead-light">
             <tr>
               {columns.map((column) => (
