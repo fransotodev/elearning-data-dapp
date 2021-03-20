@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Final Project of my university studies \"Grado en Ingeniería Informática\". This is a decentralized application to sell elearning data from a LRS (Learning Record Store)",
   "main": "",
-  "scripts": {},
+  "scripts": {
+    "benchmark": "node scripts/runBenchmark.js",
+    "migrate": "node scripts/migrate.js"
+  },
   "author": "Francisco Manuel Soto Ramírez",
   "license": "ISC",
   "dependencies": {

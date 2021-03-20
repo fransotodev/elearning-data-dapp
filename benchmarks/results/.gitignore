@@ -1,1 +1,4 @@
-# Not ignoring anything at the moment, just making sure this repo is included
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore

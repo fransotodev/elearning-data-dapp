@@ -29,15 +29,4 @@ fs.copyFileSync(
   `${__dirname}/../dapp/src/contracts_build/LearningDataSmartContract.json`
 );
 
-//Copying in a benchmark folder
-const file = JSON.parse(
-  fs.readFileSync(`${__dirname}/../build/contracts/${sourceCodeName}.json`)
-);
-//Gas estimation value (big enough to avoid Caliper complaining)
-file.gas = 3000000;
-fs.writeFileSync(
-  `${__dirname}/../benchmarks/contracts/LearningDataSmartContract.json`,
-  JSON.stringify(file, null, 2)
-);
-
-console.log("Contract copied to benchmark and dapp folders");
+console.log("Contract copied to dapp folder");
