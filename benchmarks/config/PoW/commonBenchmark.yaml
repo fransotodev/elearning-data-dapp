@@ -7,7 +7,7 @@ test:
     number: 1
   rounds:
     #---------------------------------------------------------------Register increasing send rate:---------------------------------------------------------------
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 25tx @ 10 TPS
       contractId: LearningDataContract
       txNumber: 25
       rateControl:
@@ -18,7 +18,7 @@ test:
         arguments:
           contractId: LearningDataContract
           contractVersion: 0.0.1
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 50tx @ 10 TPS
       contractId: LearningDataContract
       txNumber: 50
       rateControl:
@@ -29,7 +29,7 @@ test:
         arguments:
           contractId: LearningDataContract
           contractVersion: 0.0.1
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 75tx @ 10 TPS
       contractId: LearningDataContract
       txNumber: 75
       rateControl:
@@ -52,7 +52,7 @@ test:
           contractId: LearningDataContract
           contractVersion: 0.0.1
     # --------------------------------------------------------------------------------------------------------------------------------
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 25tx @ 50 TPS
       contractId: LearningDataContract
       txNumber: 25
       rateControl:
@@ -63,7 +63,7 @@ test:
         arguments:
           contractId: LearningDataContract
           contractVersion: 0.0.1
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 50tx @ 50 TPS
       contractId: LearningDataContract
       txNumber: 50
       rateControl:
@@ -74,7 +74,7 @@ test:
         arguments:
           contractId: LearningDataContract
           contractVersion: 0.0.1
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 75tx @ 50 TPS
       contractId: LearningDataContract
       txNumber: 75
       rateControl:
@@ -85,7 +85,7 @@ test:
         arguments:
           contractId: LearningDataContract
           contractVersion: 0.0.1
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 100tx @ 50 TPS
       contractId: LearningDataContract
       txNumber: 100
       rateControl:
@@ -97,7 +97,7 @@ test:
           contractId: LearningDataContract
           contractVersion: 0.0.1
     # --------------------------------------------------------------------------------------------------------------------------------
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 25tx @ 100 TPS
       contractId: LearningDataContract
       txNumber: 25
       rateControl:
@@ -108,7 +108,7 @@ test:
         arguments:
           contractId: LearningDataContract
           contractVersion: 0.0.1
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 50tx @ 100 TPS
       contractId: LearningDataContract
       txNumber: 50
       rateControl:
@@ -119,7 +119,7 @@ test:
         arguments:
           contractId: LearningDataContract
           contractVersion: 0.0.1
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 75tx @ 100 TPS
       contractId: LearningDataContract
       txNumber: 75
       rateControl:
@@ -130,7 +130,7 @@ test:
         arguments:
           contractId: LearningDataContract
           contractVersion: 0.0.1
-    - label: RegisterOffer 100tx @ 10 TPS
+    - label: RegisterOffer 100tx @ 100 TPS
       contractId: LearningDataContract
       txNumber: 100
       rateControl:
