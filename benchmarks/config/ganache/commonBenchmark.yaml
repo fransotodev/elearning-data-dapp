@@ -1,0 +1,153 @@
+---
+test:
+  name: LearningDataContract Benchmark - Ganache Simulation
+  description: Benchmark for LearningDataContract Ethereum Smart Contract
+  workers:
+    type: local
+    number: 1
+  rounds:
+    #---------------------------------------------------------------Register increasing send rate:---------------------------------------------------------------
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 25
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 10 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 50
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 10 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 75
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 10 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 100
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 10 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    # --------------------------------------------------------------------------------------------------------------------------------
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 25
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 50 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 50
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 50 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 75
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 50 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 100
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 50 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    # --------------------------------------------------------------------------------------------------------------------------------
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 25
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 100 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 50
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 100 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 75
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 100 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: RegisterOffer 100tx @ 10 TPS
+      contractId: LearningDataContract
+      txNumber: 100
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 100 }
+      workload:
+        module: workloads/registerOffer.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+monitors:
+  resource:
+    - module: process
+      options:
+        interval: 3
+        processes:
+          [{ command: "node", arguments: "caliper.js", multiOutput: "avg" }]
+      charting:
+        bar:
+          metrics: [all]

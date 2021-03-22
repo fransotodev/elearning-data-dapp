@@ -12,10 +12,10 @@
         "contracts": {
             "LearningDataContract": {
                 "estimateGas": true,
-                "path": "contracts/LearningDataContract.json",
+                "path": "contracts/LearningDataSmartContract.json",
                 "gas": {
-                    "register": 3000000,
-                    "offer": 3000000 
+                    "registerOffer": 3000000
+                    
                 }
             }
         }

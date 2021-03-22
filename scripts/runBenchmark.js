@@ -32,8 +32,9 @@ let networkConfigFile =
 
 listConfigs.map(async (configFile, index) => {
   console.log(index);
+
   execSync(
-    `npx caliper launch manager --caliper-workspace ${__dirname}/../benchmarks/ --caliper-benchconfig config/${folderName}/${configFile} --caliper-networkconfig networks//${networkConfigFile}.json`,
+    `npx caliper launch manager --caliper-workspace ${__dirname}/../benchmarks/ --caliper-benchconfig config/${folderName}/${configFile} --caliper-networkconfig networks/${networkConfigFile}.json`,
     { stdio: "inherit" }
   );
   fs.copyFileSync(
