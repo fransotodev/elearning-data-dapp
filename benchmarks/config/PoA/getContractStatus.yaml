@@ -1,0 +1,63 @@
+---
+test:
+  name: LearningDataContract Benchmark - Ganache Simulation
+  description: Benchmark for LearningDataContract Ethereum Smart Contract
+  workers:
+    type: local
+    number: 1
+  rounds:
+    #---------------------------------------------------------------Register increasing send rate:---------------------------------------------------------------
+    - label: GetContractStatus 50tx @ 100 TPS
+      contractId: LearningDataContract
+      txNumber: 50
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 100 }
+      workload:
+        module: workloads/getContractStatus.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: GetContractStatus 100tx @ 100 TPS
+      contractId: LearningDataContract
+      txNumber: 100
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 100 }
+      workload:
+        module: workloads/getContractStatus.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: GetContractStatus 150tx @ 100 TPS
+      contractId: LearningDataContract
+      txNumber: 150
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 100 }
+      workload:
+        module: workloads/getContractStatus.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+    - label: GetContractStatus 200tx @ 100 TPS
+      contractId: LearningDataContract
+      txNumber: 200
+      rateControl:
+        type: fixed-rate
+        opts: { tps: 100 }
+      workload:
+        module: workloads/getContractStatus.js
+        arguments:
+          contractId: LearningDataContract
+          contractVersion: 0.0.1
+monitors:
+  resource:
+    - module: process
+      options:
+        interval: 3
+        processes:
+          [{ command: "node", arguments: "caliper.js", multiOutput: "avg" }]
+      charting:
+        bar:
+          metrics: [all]
