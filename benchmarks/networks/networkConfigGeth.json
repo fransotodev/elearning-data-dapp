@@ -14,8 +14,11 @@
                 "estimateGas": true,
                 "path": "contracts/LearningDataSmartContract.json",
                 "gas": {
-                    "registerOffer": 3000000
-                    
+                    "registerOffer": 30000000,
+                    "getContractStatus": 30000000,
+                    "getOffer": 30000000,
+                    "GetPurchasedOffersIndexes": 30000000,
+                    "NumOffers": 30000000
                 }
             }
         }
