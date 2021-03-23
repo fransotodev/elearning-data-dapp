@@ -1,5 +1,3 @@
-//Not using this script, it probably overlap
-
 const fs = require("fs");
 const { execSync } = require("child_process");
 
@@ -16,8 +14,10 @@ execSync(`truffle compile --all`, {
 const file = JSON.parse(
   fs.readFileSync(`${__dirname}/../build/contracts/LearningDataContractV2.json`)
 );
-//Gas estimation value (big enough to avoid Caliper complaining)
+
+//Gas estimation value (big enough to avoid Caliper complaining on Contract deployment)
 file.gas = 3000000;
+
 fs.writeFileSync(
   `${__dirname}/../benchmarks/contracts/LearningDataSmartContract.json`,
   JSON.stringify(file, null, 2)
