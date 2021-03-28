@@ -6,7 +6,8 @@
   "scripts": {
     "benchmark": "node scripts/runBenchmark.js",
     "migrate": "node scripts/migrate.js",
-    "ganache": "ganache-cli -m source jewel review offer prosper reform tent carpet cry license hint lottery"
+    "ganache": "ganache-cli -m source jewel review offer prosper reform tent carpet cry license hint lottery",
+    "populate": "node scripts/populateBlockchain.js"
   },
   "author": "Francisco Manuel Soto Ramírez",
   "license": "ISC",

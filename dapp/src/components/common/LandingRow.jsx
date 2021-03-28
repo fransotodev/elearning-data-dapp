@@ -36,7 +36,7 @@ LandingRow.propTypes = {
   text1: PropTypes.string,
   text2: PropTypes.string,
   text3: PropTypes.string,
-  image: PropTypes.object,
+  image: PropTypes.string,
   leftAlignment: PropTypes.bool,
   onLoad: PropTypes.func,
 };
