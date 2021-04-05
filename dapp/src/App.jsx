@@ -172,9 +172,9 @@ class App extends Component {
 
     if (this.state.contractStatus === "Stopped") {
       return (
-        <>
+        <div className="container mt-4">
           <h1 style={{ textAlign: "center" }}>
-            This website is stopped by Owner
+            The Smart Contract is stopped by the Owner
           </h1>
           {!this.state.isOwner && (
             <ContractStatus color={"danger"} contractStatus={"Stopped"} />
@@ -185,7 +185,7 @@ class App extends Component {
               handleButtonClick={this.handleChangeStatusButtonClick}
             />
           )}
-        </>
+        </div>
       );
     } else if (this.state.loading) {
       return <LoadingIcon />;
