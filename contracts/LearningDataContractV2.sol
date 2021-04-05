@@ -1,11 +1,12 @@
 pragma solidity ^0.7.4;
 
+import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 
-contract LearningDataContractV2 is
+contract LearningDataContract is
     Initializable,
     OwnableUpgradeable,
     ReentrancyGuardUpgradeable
@@ -36,6 +37,15 @@ contract LearningDataContractV2 is
         uint8 status
     );
 
+    event OfferPurchased(
+        uint256 index,
+        string description,
+        uint256 price,
+        address payable[] accountsToPay,
+        address buyer,
+        uint8 status
+    );
+
     CountersUpgradeable.Counter private counterOffers;
     ContractStatus private contractStatus;
 
@@ -47,15 +57,6 @@ contract LearningDataContractV2 is
         __ReentrancyGuard_init();
         contractStatus = ContractStatus.Active;
     }
-
-    event OfferPurchased(
-        uint256 index,
-        string description,
-        uint256 price,
-        address payable[] accountsToPay,
-        address buyer,
-        uint8 status
-    );
 
     modifier isQueryActive() {
         require(
@@ -90,7 +91,7 @@ contract LearningDataContractV2 is
         else return "Unknown";
     }
 
-    function numOffers() public view returns (uint256) {
+    function numOffers() public view isQueryActive returns (uint256) {
         return CountersUpgradeable.current(counterOffers);
     }
 

@@ -1,5 +1,6 @@
 pragma solidity ^0.7.4;
 
+import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
@@ -90,7 +91,7 @@ contract LearningDataContract is
         else return "Unknown";
     }
 
-    function numOffers() public view returns (uint256) {
+    function numOffers() public view isQueryActive returns (uint256) {
         return CountersUpgradeable.current(counterOffers);
     }
 
