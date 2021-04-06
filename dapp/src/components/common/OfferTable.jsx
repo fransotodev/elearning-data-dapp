@@ -9,7 +9,7 @@ class OfferTable extends Component {
   render() {
     const { columns, data } = this.props;
     return (
-      <>
+      <div style={{ width: "100%", overflow: "auto" }}>
         <table className="table ">
           <thead className="thead-light">
             <tr>
@@ -44,7 +44,7 @@ class OfferTable extends Component {
             ))}
           </tbody>
         </table>
-      </>
+      </div>
     );
   }
 }
