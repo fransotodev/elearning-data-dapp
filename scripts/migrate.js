@@ -2,7 +2,7 @@ const fs = require("fs");
 const { execSync } = require("child_process");
 
 const { argv } = require("process");
-const [, , version] = argv;
+var [, , version, network] = argv;
 
 let start, end, sourceCodeName;
 if (version === "1") {
@@ -17,11 +17,26 @@ if (version === "1") {
   throw Error("Not suported version");
 }
 
-console.log(`truffle migrate --compile-all --f ${start} --to ${end}`);
+if (
+  network === undefined ||
+  network === "ganache" ||
+  network === "development"
+) {
+  network = "development";
+} else if (network !== "geth") {
+  throw Error("Not suported network");
+}
 
-execSync(`truffle migrate --compile-all --f ${start} --to ${end}`, {
-  stdio: "inherit",
-});
+console.log(
+  `truffle migrate --compile-all --f ${start} --to ${end} --network ${network}`
+);
+
+execSync(
+  `truffle migrate --compile-all --f ${start} --to ${end} --network ${network}`,
+  {
+    stdio: "inherit",
+  }
+);
 
 //Copying in a dapp folder
 fs.copyFileSync(

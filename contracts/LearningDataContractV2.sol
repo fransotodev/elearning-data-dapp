@@ -6,7 +6,7 @@ import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol
 import "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 
-contract LearningDataContract is
+contract LearningDataContractV2 is
     Initializable,
     OwnableUpgradeable,
     ReentrancyGuardUpgradeable
