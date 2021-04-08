@@ -27,6 +27,11 @@ if (
   throw Error("Not suported network");
 }
 
+//Remove openzeppelin files for geth deployment
+if (version === "1" && network === "geth") {
+  fs.rmdirSync(`${__dirname}/../.openzeppelin/`, { recursive: true }, () => {});
+}
+
 console.log(
   `truffle migrate --compile-all --f ${start} --to ${end} --network ${network}`
 );

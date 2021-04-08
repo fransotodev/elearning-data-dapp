@@ -51,7 +51,6 @@ module.exports = {
       host: "localhost",
       port: 8001,
       network_id: "*",
-      from: "0xdbA9A8E631585FdF48c511C25999f840473Ca6A4",
     },
     // Another network with more advanced options...
     // advanced: {
