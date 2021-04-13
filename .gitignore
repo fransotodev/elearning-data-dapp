@@ -177,3 +177,5 @@ $RECYCLE.BIN/
 #Not classified report and logs from benchmark:
 benchmarks/caliper.log
 benchmarks/report.html
+
+scripts/data.js
