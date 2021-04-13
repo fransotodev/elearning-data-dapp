@@ -66,7 +66,7 @@ Where 1 or 2 is the version of the Smart Contract to deploy. Keep in mind versio
 
 Once the contract is deployed to the network, we can start the dApp.
 
-- Populate the ganache blockchain with some data (A simple script so you don't have to register offers one by one. If you want it for one of the geth blockchains, change the port inside `./scripts/populate.js` from 8545 (ganache) to 8001)
+- Populate the ganache blockchain with some data (A simple script so you don't have to register offers one by one. If you want it for one of the geth blockchains, change the port inside `./scripts/populate.js` from 8545 (ganache) to 8001). You will need the data in a file data.js inside the `scripts/` folder.
 
   `npm run populate`
 
