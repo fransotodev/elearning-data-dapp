@@ -7,6 +7,8 @@ This project contains 2 node projects:
 - One for the Smart Contract (development, testing, deployment via Truffle and benchmark with Hyperledger Caliper).
 - Another inside the `./dapp/` folder which contains the code of a web dApp to interact with the Smart Contract.
 
+Check the [interface gallery](./docs/UserInterface.md) to see how it looked!
+
 ## Smart Contract
 
 The Smart Contract contains the functionality to register and buy offers, and to submit queries to retrieve offers.
