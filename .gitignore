@@ -179,3 +179,4 @@ benchmarks/caliper.log
 benchmarks/report.html
 
 scripts/data.js
+scripts/dataAWS.js
