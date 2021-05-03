@@ -9,6 +9,8 @@ This project contains 2 node projects:
 
 Check the [interface gallery](./docs/UserInterface.md) to see how it looked!
 
+Check the [complete documentation](./docs/Francisco-Manuel-Soto-Ramírez-University-Documentation.pdf) of my final degree project (in Spanish)
+
 ## Smart Contract
 
 The Smart Contract contains the functionality to register and buy offers, and to submit queries to retrieve offers.
