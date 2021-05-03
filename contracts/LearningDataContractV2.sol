@@ -230,8 +230,4 @@ contract LearningDataContractV2 is
             IndexToOffer[index].authorizationHeader
         );
     }
-
-    function returnString() public pure returns (string memory) {
-        return "Hello World, this is contract V2, nice upgrade!!";
-    }
 }

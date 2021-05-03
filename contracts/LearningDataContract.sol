@@ -83,12 +83,9 @@ contract LearningDataContract is
         contractStatus = ContractStatus.Stopped;
     }
 
+    //Wrong on purpose, in order to upgrade to V2 where the implementation is correct.
     function getContractStatus() public view returns (string memory) {
-        if (contractStatus == ContractStatus.Active) return "Active";
-        else if (contractStatus == ContractStatus.OnlyQueries)
-            return "OnlyQueries";
-        else if (contractStatus == ContractStatus.Stopped) return "Stopped";
-        else return "Unknown";
+        return "OnlyQueries";
     }
 
     function numOffers() public view isQueryActive returns (uint256) {

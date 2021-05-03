@@ -31,14 +31,7 @@ export async function testBlockchain() {
 export async function isContractOwner() {
   const { Contract, account } = await createContract();
   const owner = await Contract.methods.owner().call();
-  // console.log(">>>", );
-  try {
-    const result = await Contract.methods.returnString().call();
-    console.log(result);
-  } catch (err) {
-    console.error(err);
-  }
-  console.log("OWNER: ", owner);
+
   return account === owner;
 }
 
@@ -51,7 +44,7 @@ export async function getContractStatus() {
 
 export async function setContractStatus(status) {
   const { Contract, account } = await createContract();
-  console.log(status);
+
   switch (status) {
     case "Active":
       await Contract.methods.setStatusActive().send({ from: account });
@@ -140,7 +133,6 @@ export async function registerOffer(offerData, cb = null) {
     )
     .send({ from: account, gas: 3000000 });
 
-  console.log("Offer registered with index ", index);
   if (cb) {
     cb();
   }
