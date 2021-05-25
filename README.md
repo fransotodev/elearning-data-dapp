@@ -1,6 +1,6 @@
 # Decentralized Application to buy and sell eLearning analytics
 
-This project was presented as my final degree project at University of Cádiz.
+This is my final degree project of my studies in Computer Engineering at University of Cádiz. It was graded with a 10 out of 10 and was proposed to receive an honorific mention.
 
 This project contains 2 node projects:
 
